@@ -1,0 +1,30 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "React Course",
+  "main": "App.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ganesh-pr/Namaste-React.git"
+  },
+  "author": "Ganesh D",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ganesh-pr/Namaste-React/issues"
+  },
+  "homepage": "https://github.com/ganesh-pr/Namaste-React#readme",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "parcel": "^2.8.2",
+    "process": "^0.11.10"
+  },
+  "browserslist": [
+    "last 2 Chrome versions"
+  ]
+}
