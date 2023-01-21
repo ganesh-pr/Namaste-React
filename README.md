@@ -40,6 +40,20 @@ R: JSX sanitization, Component Composition, React Reconciliation, Diff algorithm
 R: Parcel needs to be a dev dependency or prod dependency
  One cannot use css over key
 
+L4 - Talk is Cheap, Show me the code
+React Fragment, Props, Virtual DOM and Reconciliation
+
+Diff between Compiler and Transpiler
+Functional components - Round brackets are needed when there are multiple lines
+Line and MultiLine Comments
+
+Javascript can be used inside of JSX by using curly braces {}
+React does not force us to use JSX or typescript or ES6
+
+IQ: How to approach interview questions building an app. Like choosing the list or other elements etc
+
+Padding (inner space) is used to separate text boxes and images while also keeping them aligned and is used to separate elements from sticking to the border. Only positive values.
+Margin is (outer space) used to space between independent elements and the external page of the website. Positive and negative values. Also used for: changing positions on a site, Overlap one element over other, Setting the distance between elements.
 
 
 

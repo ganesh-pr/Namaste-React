@@ -1,8 +1,25 @@
 #container {
-    background-color: yellow;
+    background-color: green;
 }
 
-.headerClass {
+h1 {
+    padding: 10px;
+}
+
+.header {
     display: flex;
     justify-content: space-between;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+
+ul {
+    background-color: yellow;
+    list-style-type: none; 
+    display: flex;
+}
+
+ul > li {
+    padding: 10px;
 }
