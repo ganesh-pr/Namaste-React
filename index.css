@@ -1,5 +1,5 @@
 #container {
-    background-color: green;
+    background-color: red;
 }
 
 h1 {
@@ -10,16 +10,32 @@ h1 {
     display: flex;
     justify-content: space-between;
     margin: 10px;
-    border: 1px solid black;
+    border: 1px solid red;
 }
 
 
 ul {
-    background-color: yellow;
     list-style-type: none; 
     display: flex;
 }
 
 ul > li {
     padding: 10px;
+}
+
+.card {
+ width: 200px;
+ margin: 10px;
+ border: 1px solid black; 
+ padding: 10px;   
+}
+
+.card > img {
+    width: 100%; /** Make the image take 100% of the card width */
+    
+}
+
+.restaurant-list {
+    display: flex;
+    flex-wrap: wrap;
 }
