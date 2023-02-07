@@ -204,3 +204,167 @@ F: Bootcamp
 Try to answer 5 questions in discord
 
 BE A BEAST IN YOUR FIELD
+
+L6: Exploring the world
+
+Hooks are normal functions. When we have a website, there is some data inside it and when we do something, this data should update, our UI should update. So when user is doing actions, data should be updated.
+
+When we have something that changes on the UI, we use local state to handle that.
+
+For example, when data updates on click of a button, local variable will change. However, the change will not be displayed on the UI. We will need something to sync that data on the UI. For that Syncing, we use a state variable. React  will need to track the change to be able to sync that state with the UI.
+Clicking on Change Title will update the title const but UI will not display the updated title.
+
+I: Read about React Fiber - The latest reconciliation algorithm
+
+<h1>
+<div>
+    <ul>
+        <li>
+            </>
+I: If someone asks Why React is fast. It is because of strong DOM manipulation. The most expensive operation on the UI state change is DOM manipulation. Like modifying a list or something, React does faster DOM manipulation.
+
+How does it do faster DOM manipulation? Because of the super powerful diff algorithm. It detects the diff from the algorithm and it just changes that.
+
+Clicking on the button is changing the variable. UI is not displaying the updated variable. React needs to know I have to keep my UI in sync with the variable. React needs to know I need to keep tracking the change on title. If the title changes, it changes. React cannot do that on normal variable, so we use useState variable.
+
+That is why, we use state variables.
+
+If some one asks why do we use state variables, not local variables. This is because React does not track these local variables. React says that I will only track those variables which are local state variables. We use useState to create a state variable. It is available from the react core library.
+
+React gives us access to two items as part of useState function. One is state variable and the other is a function to update the state variable. We use array destructuring to access these two items.
+
+ We pass in an initial state as an argument to useState. React needs some initial value to put in this variable.
+
+const [title, setTitle] = useState(); 
+is same as
+let title; 
+
+THe title is now not a normal variable. React is keeping track of it because we are using useState.
+
+Now, as and when the title is updated, now as and when the title changes, our algorithm is super fast and it changes the title quickly. It will re-render this component with the updated title.
+
+
+<button onClick={() => setTitle('New Food App')}> Change Title </button>
+
+As and when we clicked on the button, the onClick function was called and the title variable was updated. Then React re-renders the component. When re-rendering the component, React triggers the Reconciliation algorithm. React exactly knows that I just want to re-render the h1 tag on the Ui.
+
+Look at the elements tab in browser, only h1 got updated. And observe the console logs render is printed on click. So the entire Header component is re-rendered again quickly and it triggers the reconciliation process. It will just update the h1 node. It takes a few milliseconds to calculate all this. Just a few milliseconds.
+
+Reconciliation is the process of checking the difference between the two tree. Checking the difference between two states of Virtual DOM. It quickly updates the virtual DOM and also quickly updates the actual DOM as well. It keeps in Sync and that is why React is fast.
+
+The same thing in JS needs a lot of code and the app is not performant. That is why, React is so fast.
+
+Why it re-renders the whole component?
+We might be using the state variable many times and there could be different state variables that might be changing. We need to re-render the component with the updated state values. It just updates the whole UI. This is why React is very powerful.
+
+Everytime, it is triggering the reconciliation algorithm, modifying teh virtual DOM, finding the difference, updating the actual DOM very fast on every key press.
+
+In case of search text input box, its reloading the whole input but chorme only shows the value update.
+
+Microservices:
+When you have to build a large project such as Swiggy or flipkart or Amazon or Uber, there are multiple react projects and microservices. There are 100s of microservices running Uber.
+
+In the olden days, there used to be one Java application: It would have APIs and even the UI used to reside in the APIs. Same project would have code for SMS sending. Same app is used for notification. Hundreds of developers are working in one project. It has its advantages that we need not maintain different projects, different repos. This architecture is known as monolith. There are many advantages of monolith and there are so many applications working on monolith.
+
+World is now moving towards microservice architecture
+
+We now have separate projects for UI, API, notification, logs, and authentication. That is why we have different ports. UI is running on 1234. Backend is running on 1235. Even databases have replicas not one database. We are separating our concerns and single responsibility. All can follow different languages.
+
+UI can follow react, backend API can follow Java, Notifications and logs can be written in Python. Authentication can happen in Go lang. All different projects.
+
+The choice of language depends on the use case. Most of the microservices in Uber are written in GoLang.
+
+Food villa is a new UI microservice. 
+
+Swiggy.com: 3000 --> /
+          : 4000 --> /dapi
+          : 5000 --> /notifications
+
+Different ports but the same domain name. Suppose for GitHub, apis come from api.github.com and there is a different github.com. These are two different domains. And these can call each other using these different url / to /dapi and /dapi to /notifications etc.
+
+We are exploring the world. Our UI will be talking to other services.
+
+fetch is available to us through JS engine's window object. It is pre-built JS function that is there in JS. It is a browser API. Its a super power given to us. We can call the fetch function and pass as an arg an api and the fetch function calls that API.
+
+Calling a fetch API in Component is not good. Because on every keypress, every state change and every re-render the API is called.
+
+Two ways to load data:
+1. Load the website, call the API (300ms) and render the page (200ms). Total render time is 500ms
+2. Load the website, show something on the UI, call the API, update the UI
+
+Second is because of the UX. Best part is the reconciliation algorithm. React tells us to do this many times. React has given us a functionality to make this happen. React gives us the amazing functionality: useEffect.
+
+First way will take time to get the API and then creating and updating the DOM structure will take some more time.
+
+Second way, we will render something quickly before the API call.
+
+useEffect will not be called immediately but whenever my useEffect wants to be called. If useEffect is called on demand, it will be called after render.
+
+A COMPONENT WILL RE-RENDER IF STATE CHANGES OR PROPS CHANGES.
+
+1. If we need useEffect to be called after every re-render.
+useEffect(() => {
+    console.log('render');
+})
+
+2. If we need useEffect to be called on demand, we pass the dependency array as a parameter.
+useEffect(() => {
+    console.log('render');
+}, []);
+
+useEffect needs to be imported as a named import from the react library. useEffect is hook (which is nothing but a function) and we pass two params: one is the callback function, another is the dependency array.
+
+3. If we need useEffect to be called only on state changes or on first render, we pass the state variable into the dependency array
+
+useEffect(() => {
+    console.log('render');
+}, [searchText])
+
+Call the render console only when the dependency state variable searchText changes or when the first time render.
+
+UseEffect dependency array with no arguments in the array - called only once after render
+
+UseEffect dependency array with argument as state variable - called once after render + every time the state variable is updated
+
+useEffect with no second param i.e. useEffect has only call back function - called after each render
+
+
+QQQQ: Curly braces can only take JS Expressions but not statement
+Read: JSX Curly braces (beta.reactjs.org)
+{
+    a=10;
+    console.log(a);
+
+}
+
+The above code does not work as it is a statement
+
+{
+    ((a=10), console.log(a));
+}
+
+The above code works because it is an expression
+
+IF else is a stament, we cannot do it. Ternary operator is an expression
+
+Toggling the login and log out button:
+React knows exactly which node to change and it will change the login and log out button. This is why React is fast.
+
+Why your application is fast:
+There are bundlers which are doing the minification, transpilation, removing console logs, doing image optimization, lot of bundling, parcel is the beast and parcel is doing all of the above.
+We also have in our application React, which has Virtual DOM, reconciliation, diff algorithm (tracking teh diff of trees and updating only the change in DOM, the DOM updates in React very fast)
+
+What is the use of Babel, Parcel, JSX, React.
+What is the use of different libraries: React and React DOM
+The diff algorithm is written in the core of react and dom updates happen via react-dom 
+Diff algorithm works the same way in React Native mobile apps
+
+Q; Why do we do await twice on fetch (Ref: Body.js)
+
+Learn git in command line and then only use Git Lens
+
+Shimmer UI - https://medium.com/@dhilipkmr/the-loading-shimmer-f7129ac41894
+
+useEffect is a hook, provided by React, that can be called after the component is rendered.
+useEffect takes two params: callback function and dependency array.
+callback function is called after render. 
