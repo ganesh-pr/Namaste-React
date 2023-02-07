@@ -48,3 +48,14 @@ ul > li {
 .search-container > input {
     margin-right: 10px;
 }
+
+.shimmer-card {
+    width: 100px;
+    height: 100px;
+    background-color: lightgrey;
+    margin: 20px;
+}
+
+.error-message {
+    color: red
+}
