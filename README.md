@@ -368,3 +368,82 @@ Shimmer UI - https://medium.com/@dhilipkmr/the-loading-shimmer-f7129ac41894
 useEffect is a hook, provided by React, that can be called after the component is rendered.
 useEffect takes two params: callback function and dependency array.
 callback function is called after render. 
+
+L7 - Exploring the Path
+
+Never write component inside a component i.e. before return statement . Because each component will be created on each render.
+
+Never write useState inside if else. React does not like inconsistencies. React does not know if the stae will be there always or not.
+
+Never use useState outside of the functional component. This is because useState is a hook provided by React that creates a local state variable inside a functional component.
+
+HW: Why is CDN a better place to host your images: Faster, caches your images, 100% uptime
+
+import packages only if it is important and needed. Better to code small components.
+
+We will import packages only if the work is tedious. Eg: Formik
+
+Write a component from scratch. Never use the shortcut rafce for better practice.
+
+Create configuration using createBrowserRouter (recommended router for React). createBrowserRouter is the router config.
+
+Pass routes to createBrowserRouter {path: <Url>, element: <component name>}. createBrowserRouter takes an array which is a list of objects with the path details.
+If you now type localhost:3000/about, the app will not render the about page because we have not provided the router to our renderer
+Using RouterProvider, provide the appRouter to the app in the root.render
+root.render(<RouterProvider router={appRouter}>)
+
+JS runs in sequence. So always have the router created after AppLayout.
+
+Read: Read about all the routers
+
+react-router-dom is created by Remix and not Meta
+
+errorElement is another attribute with path and element to show an error component in case the user types in a different route.
+
+The problem with anchor tag (similar to the one on logo) is it refreshes the whole page
+
+Single Page Application:
+Our application does not reload. It does not make network call when changing the route
+
+Two types of routing: Client-side routing and SWerver-side routing
+
+Server-side routing: Get the new route components from server (Old applications)
+
+Client-side routing: Go to the new route without making network call. This is because we have all the components fetched. We will use this when we do not want to load anything from the server by making network calls.
+
+Using anchor tag will reload the whole application. Use link to not reload.
+
+Link will be used by React to track routes. Eventually, link will be converted to anchor
+as browser understands anchor tag only.
+
+Since we need to always display header and footer, the outlet for rendering needs to be the placeholder between Header and Footer layout in Body component
+
+So, Header and Footer should not change, only the outlet will change. All the children will go into the outlet according to the route.
+
+children should also include the default route i.e. for Body
+
+Reconciliation can be observed in browser. React Router DOM is taking care of everything during routing
+
+root div is showing as updated in chrome because the child div is changing
+
+Outlet is a component
+
+For dynamic routing, to read the id, we use useParams hook from react-router-dom. path: 'restaurant/:id'
+
+Image is a default export 
+
+HW: Build a login page using formik
+
+Create a router using createBrowserRouter. Takes array of configuration objects. Each config object has path and element. Error elemeent is errorElement
+Use RouterProvider to provide the router to the app
+Component that fills in: Outlet from react-router-dom
+Children that we make go inside outlet
+Does the sequence of the children matter: No
+useRouteError hook will get the error information
+errorElement has the error component
+Read dynamic id using useParams hook
+Having different components will help in Modular, Readable, Maintainable, Reusable and testable
+At the end of the day, link uses anchor tag
+
+logging useState returns an array of two items: first with the initial value and second with the call back function
+
