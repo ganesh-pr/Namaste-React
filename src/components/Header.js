@@ -1,5 +1,6 @@
-import Food_Villa_New from "../../Food_Villa_New.png";
-import { useState } from "react";
+import Food_Villa_New from "../assets/img/Food_Villa_New.png";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Title = () => {
   return (
@@ -22,10 +23,18 @@ const Header = () => {
       <div className="header" style={{ backgroundColor: "yellow" }}>
         <Title />
         <ul className="nav-items">
-          <li>Home</li>
-          <li>About Us</li>
-          <li>Contact Us</li>
-          <li>Cart</li>
+          <Link to="/">
+            <li>Home</li>
+          </Link>
+          <Link to="/about">
+            <li>About Us</li>
+          </Link>
+          <Link to="/contact">
+            <li>Contact Us</li>
+          </Link>
+          <Link to="/cart">
+            <li>Cart</li>
+          </Link>
         </ul>
         {isLoggedIn ? (
           <button onClick={() => setIsLoggedIn(false)}>Logout</button>

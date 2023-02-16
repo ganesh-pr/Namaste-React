@@ -6,12 +6,17 @@ import {
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 const RestaurantList = ({ restaurants }) => {
   return (
     <div className="restaurant-list">
       {restaurants.map((res) => {
-        return <RestaurantCard {...res?.data} key={res?.data.id} />;
+        return (
+          <Link to={"restaurant/" + res?.data.id} key={res?.data.id}>
+            <RestaurantCard {...res?.data} />
+          </Link>
+        );
       })}
     </div>
   );

@@ -14,7 +14,7 @@ h1 {
 }
 
 
-ul {
+.header > ul {
     list-style-type: none; 
     display: flex;
 }
@@ -58,4 +58,8 @@ ul > li {
 
 .error-message {
     color: red
+}
+
+.menu, .detail {
+    display: flex;
 }
