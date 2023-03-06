@@ -447,3 +447,270 @@ At the end of the day, link uses anchor tag
 
 logging useState returns an array of two items: first with the initial value and second with the call back function
 
+L8:
+Class Based Components: Helps a lot in interview
+Before joining Uber, coding was heavily done in class based components
+When React started, concepts of components was introduced via class based components. Hooks have recently started coming in.
+
+Earlier, no concept of hooks, useState and useEffect. Only Class Based Components used to be there.
+
+It used to be painful to write the code but it was magical at that time as many developers were coming from jQuery and moved to React and it used to be super amazing thing. It was amazing to write class based components, to use React, to have Reconciliation process. It was not very effective as it is today but still it is effective. We were used to make large applications using only Class Based Components. Class Based Components is the only big thing aat that time. React was built on top of it.
+
+The concept of component is same as today but the code we used to write is a bit different. Later on React core team or community, when we used to write in React using Class based components, things get to become messy. Code was not much clean. Class Based components code used to be very big as compared with functional components. It was less maintainable and confusing for a few developers.
+
+Now that we have known how to build an application using functional components, we can now understand class based components.
+
+Class Based Components are no longer used. If you are making a new project, you would not be using class based components as not used any more now. Because we can write ALMOST everything using functional components.
+
+We are discussing because we might go to a company which has older projects which are already using class based components. Don't use it in any upcoming new projects but we should know it.
+
+No teacher can teach you 100% React, we need to give our 120% to practice things up. Do your assignments. 
+------------------------------------------------------------------
+Review from last class:
+What are we using on About link? - Link tag
+Where did we import it from? - React-router-dom
+At the end of the day, what is the link using? - Normal anchor tag.
+What hook did we use to read the URL? - useParams 
+What function to configure routing? - createBrowserRouter
+What component to provide router to our app? - RouterProvider
+Suppose if we have children, where did this children get injected? Outlet
+Where did we import useParams, createBrowserRouter, RouterProvider, and Outlet - React-router-dom
+
+Read: createBrowserRouter is the recommended router. There are other routers such as createHashRouter and createMemoryRouter. Read about other routers during free time.
+
+Always use createBrowserRouter
+
+1. How to make nested routes? Children inside Children.
+        Children will have similar array of paths
+        Do we need to write /about/profile in path? Might work need to check but recommend path: 'profile'
+        If we use / before profile, react-router-dom will consider localhost:1234/profile
+        If use path: 'profile', it will consider parentPath/{path} => localhost:1234/about/profile
+2. Create Outlet in the parent component.
+
+----------------------------------------------------------------------
+
+Functional component is a normal JS function
+Class based component is a normal JS class
+
+Class Based Components create using Class and extends React.component
+React of React.component is imported from 'react'.
+The most important and mandatory part of Class Based Component is the render method. You cannot create a Class Based Component without a render method. What ever is returned from the render method is injected into the DOM
+
+
+Functional component is a function that returns some JSX
+Class Based component has a render method that returns some JSX
+
+We export from the class component and use it in the calling component like we export default and import it in normal functional components
+
+Functional components receive props as an argument in the function (eg: props.name). Class components receive props using this.props (eg: this.props.name)
+
+React knows this is a class based component but whenever there is a state change, it needs to re-render it.
+
+When there are multiple props, React will collect all props and attach it to the class
+
+{this.props.name}
+{this.props.xyz}
+
+Functional components have their own state
+Class based components have their own state
+
+HW: 1. When you have constructor has the argument props. Not to worry where the props come from, React handles and takes care of it. Why do we do super(props)? - Will answer about classes in JS, why do we use constructor, why react is passing props. Will open up your mind about why we are using classes in JS
+
+Always when creating a class based component, get your props inside the constructor and do super(props)
+
+Whenever we load a class, constructor is called and this is the best place to create your state. React gives us access to this.state 
+
+Eg: 
+In constructor, this.state = {count: 0}
+
+In functional components, we need to create hooks one by one.
+In class components, we create all states in the same object
+
+Eg: this.setState({count:1, count2: 0})
+
+React maintains one big object to maintain the whole state. This is for both functional and class components
+
+In this.setState, we send a modified object, the modified object can include one state item or multiple state items
+
+We do not mutate state directly
+
+React has constantly made developers happy. React will just modify the only item in the object
+
+In functional components, we are specific and we know we are setting the state of the count: setCount
+
+Read about how setState works, and what is react lifecycle 
+
+Sequence of calls: Every time a component is called: First Constructor, then render. Everytime state changes, the render is called again and again. However, constructor is not called.
+
+Why useEffect is a great place to make API calls?
+First of all, we render whatever we can using the default state. Later on, we update the state
+
+How many times will have the component re-rendered because of change in state from useEffect?
+One for the initial render with default state value and after the initial render is complete, second render will be called again with the updated state.
+
+React life cycle methods: Constructor, render, componentdidmount
+
+We need to invoke API calls in componentDidMount. Because first constructor and render will be called to render the default state. Then, componentDidMount will be called to fetch the response from API so the updated state can be rendered
+
+The JSX we return from class component is exactly the same we return from functional component
+
+We can do both the things: 
+1. import React from 'react'; 
+    and then use:
+    class test extends React.Component {
+        (or)
+2. import {Component} from 'react';
+    and then use:
+    class test extends Component
+
+    Research why we need super(props)
+
+    super(props) is the first line of constructor. Almost always.
+
+    What is the best place to initialize state? 
+    Constructor because whenever our class is initialized, the constructor is by default called
+
+    What is the sequence of calls when there are parent and child components?
+    1. Parent Constructor 
+    2. Parent render 
+    React when trying to render parent JSX, it identifies the child component and triggers the child lifecycle 
+    3. Child Constructor
+    4. Child render
+    React now completes the child lifecycle in the next step
+    5. Child ComponentDidMount
+    Now that child lifecycle is complete
+    6. Parent ComponentDidMount will be called.
+
+What is Mount in ComponentDidMount? Once the component lifecycle is complete, it will mount the component to the parent component.
+
+    What is the sequence of calls when there are parent and multiple child components?
+    1. Parent Constructor
+    2. Parent render
+    3. First Child Constructor
+    4. First Child Render
+    5. Second Child Constructor
+    6. Second Child Render
+    DOM IS UPDATED
+    7. First Child ComponentDidMount
+    8. Second Child ComponentDidMount
+    9. Parent ComponentDidMount
+
+    React lifecycle diagram is the source of truth
+    https://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+
+    IQ:
+    There are two phases in which React rendering is happening. First is the render phase and second is the commit phase.
+    In the render phase, constructor and render is called. Babel helps convert JSX to Core HTML. Core HTML is generated into the DOM. 
+    That is why we see shimmer effect.
+   ?? Commit phase starts (componentDidMount) - where React actually updates the initial DOM and componentDidMount is called
+
+    Is Render or commit phase fast? 
+    Render phase. 
+    Render phase is dealing with objects and forming the HTML. So it is fast. React patches up things inside render phase for the children
+    Commit phase needs to update DOM. Updating the DOM is tough
+
+    Going back to the example with two childs, React patches up the render phases
+
+    The flip side of not having this lifecycle is that second child will wait to render until the first child returns the api response.
+
+HW: Why componentDidMount can be made async but useEffect cannot be async. Advanced React question. How hooks were built.
+HW: Try destructuring on the userInfo object
+
+If we make an api call in child component, then parentDidMount will be called first. This is because we are calling the componentDidMount of the child component asynchronously
+
+Parent Constructor
+Parent render
+Child constructor
+Child render
+    // async function child componentDidMount will be called but the console log is not printed as await is there to wait for loading of the data
+Parent ComponentDidMount
+Child ComponentDidMount
+
+
+Second case:
+ With Child. Child making an api call in componentDidMount
+ 
+   Child - Constructor
+   Child - render
+ 
+  Child API call
+  Child - ComponentDidMount
+ 
+  setState is called and updating phase of React LifeCycle is started
+ 
+ <UPDATE CYCLES>
+
+  Child - render // This is because childComponentDidMount setState is called
+  - Name, location and image are populated here
+  Child - ComponentDidUpdate
+    */
+
+When the api is made, component is already mounted. We just need to update it.
+
+ComponentDidMount will be called after first render. ComponentDidUpdate will be called after every next render.
+
+ComponentWillUnMount will be called on navigating away from the page
+
+DISCLAIMER: Never compare React's lifecycle methods to functional components. Never say useEffect is equivalent to componentDidMount. useEffect does not use componentDidMount behind the scenes.
+
+after first render, componentDidMount is called. After every subsequent render, it is not mounted, it is updated.
+
+For useEffect, if no dependency array is provided, it is called after every render.
+For useEffect, if dependency array is blank, it is called after first render.
+
+React team when creating the modern React code, they removed the concept of React lifecycle methods
+
+useEffect with state object in the dependency array calls on every update to the state object. It is an array because array can take more than one state object.
+
+useEffect(() => {
+
+}, [count])
+
+componentDidUpdate can be used to achieve this in class based components.
+
+componentDidUpdate(prevProps, prevState) {
+    if (this.state.count !== prevState.count || this.state.count2 !== prevState.count2) {
+
+    }
+}
+
+Above is not a recommended code.
+
+Also, if we place setInterval in componentDidMount and navigate to a different page, setInterval is still called
+and when we return back to the page with setInterval, it calls two versions of setInterval
+
+This is because of SPA. SPAs do not reload the page. It is just changing the components. It is rendering. It is a bad thing about SPA. This is a lot of performance loss.
+
+We can make a scalable application by taking care of every line of code. 
+
+Use clearInterval in componentWillUnMount
+
+this is shared with all methods of the class
+
+In case of useEffect, return is used for this purpose.
+
+useEffect(() => {
+console.log("useEffect");
+
+return () => {
+    console.log("useEffect return");
+}
+
+}, [])
+
+useEffect return is printed on returning.
+
+React is popular because they realized developers stop writing code if they continue to take the route of lifecycle methods. That's why they released 
+
+You should know the internals of React.
+
+Optional HW: Read more about by clicking on Show less common lifecycles. Most of them are deprecated.
+
+HW: Why we use constructor props and super props
+When using async on useEffect, React throws error. Find the cause.
+
+
+
+
+
+
