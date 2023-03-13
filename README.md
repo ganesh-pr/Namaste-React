@@ -644,7 +644,7 @@ Second case:
   - Name, location and image are populated here
   Child - ComponentDidUpdate
     */
-
+ 
 When the api is made, component is already mounted. We just need to update it.
 
 ComponentDidMount will be called after first render. ComponentDidUpdate will be called after every next render.
@@ -708,6 +708,271 @@ Optional HW: Read more about by clicking on Show less common lifecycles. Most of
 
 HW: Why we use constructor props and super props
 When using async on useEffect, React throws error. Find the cause.
+
+
+L9_Suspense_LazyLoading_Chunking_CustomHooks
+Common hooks: useState, useEffect, useParams
+So far: Build a react page, render components, manage state, pass data from one component to another, to break down a component into smaller parts, to make an external API call, to fetch data and show it in our components, to create buttons and input boxes.
+
+Class Based components for your interviews and for older projects. Makes you understand the philosophy of React when it was built.
+
+Senior developer: How are you able to keep the code clean, to maintain the code and to manage the code
+
+One solid project makes a lot of difference.
+
+Did not copy paste even one word of the code.
+
+My HW: Play with default and named imports
+
+How many times componentDidMount will be called - one
+
+How many times componentDidUpdate will be called - when state changes
+
+Two phases of React lifecycle - Render and commit phase
+
+There are three things: Mounting, Updating and Unmounting
+
+Update happens when we change some data, when we change some behavior in our component. Whethere there is change in props, state, or onchange handlers
+
+HW: Try to do console logs in lifecycle methods and see how it works. Really very important.
+
+If a component does not have any props, does not have any state, how many times componentDidUpdate will happen - Zero times
+
+componentWillUnmount will be used to clean up.
+
+When, How and Why should we build hooks?
+
+Why should we build hooks?
+Reusability, Readability, and Separation of concerns 
+ 
+ filterData
+ Readable - Abstract the logic. Write only one line for the invocation.
+ Reusable - Filter data somewhere else in code, we can reuse it. Best practice is to make utils folder. Some people name it helper, commons, or shared folder 
+Testable - Can create test for just the filterData
+Maintainable - Easy to debug. No need to search all the code. If we need to change filter logic, I can quickly fix things up in utils.
+Modularity: Breaking down code into meaningful pieces. Can write code at the invocation itself. But created in a shimmer file that way it is modular.
+
+When creating a new hook, better to create a new file. Always create a hook with use in front of it.
+
+Component Names and file names of components should start with Uppercase
+Component Names and file names of hooks should start with lowercase use
+
+When creating a hook, better to export it by default. So there is single responsibility.
+
+restaurant in RestaurantMenu.js is a state variable. If I can fetch the data using a useRestaurant so I need not worry about where that data is coming from, it will be great. We don't have to care whether its hardcoded, whether its API. That way, the only job of restaurantMenu is to display only the details.
+
+Hooks are normal functions used to extract the logic from different functions. To export some logic into the RestaurantMenu function.
+
+RestaurantMenu has two responsibilities: fetch data and show data. useRestaurant is maintaining the state. No need to maintain the state in RestaurantMenu.js
+
+How is it different from a function component: Functional component is a function that returns a JSX
+Hook does not need to return JSX. Piece of JS code to extract some logic. Returns object, array, value
+useParams returns object
+useEffect does not return anything
+useState returns an array.
+
+RestaurantMenu will call useRestaurant and useRestaurant will have its own state reconciliation going on. React abstracted everything from us and our component will automatically update.
+
+Production Ready code Tip 1: Export all the reusable params to constants.js
+
+Offline status shows up the dino game on chrome.
+
+HW: Extract getRestaurants as a hook.
+
+Emoji editor Window + .
+
+Why a hook, why not a normal function?
+Can we make a state variable inside a normal function?
+Can we have useEffect inside a normal function?
+Will the react trigger reconciliation for normal function?
+
+Job 1 of a hook: Extract the existing logic and write it to a hook.
+Job 2 of a hook: How to write it from scratch
+
+useOnline is a normal arrow function
+return the boolean
+export default hook name
+
+Why useEffect
+Why not a normal function and not  a hook
+why a state variable and not a normal variable
+Why return isOnline
+
+Clean code. No need to worry about what useOnline is doing.
+
+Similarly, useParams is created from react-router-dom. We need not worry about the code. It just gives resId. React would also have maintained the state. Everytime my param changes, my component is reloaded.
+
+HW: Tomorrow, people from our batch would be building some libraries. You would be able to build your own npm library for useOnline. You have the potential to build a lot of things.
+
+Senior developer tip: clean event listeners
+
+Whenever we go offline and come back online, event listener will not be created.
+When we navigate to home > about > home, event listener is still there
+But we need event listener only for the body component
+It is always a good practice to clear the event listener, when we go out of the component.
+Otherwise, our browser will keep creating event listeners and will blow up.
+
+When removing event listener, we will remove the same call back function that is added for addEventListener
+Body component is doing an early return for online.
+
+Body component does not need to worry about what does useOnline do
+
+Similarly, for logout and login, we can show online status. This is how chat tools such as slack, teams show the status
+
+Whenever there is feature we can extract, we can use hooks
+
+HW: Build a hook to extract login logout functionality. useAuth
+    Similarly, getLocalVariables, and setLocalVariables. useLocalStorage
+
+In Ignite App course, we studied parcel, npm, babel. Parcel is a beast.
+What is the purpose of a parcel: Tree shaking, HMR, minification, caching, live server.
+What is the basic job of a bundler? - Bundle things.
+What should it bundle? - Bundle your code
+How many JS files does parcel produce? - 1 JS file. (Remove dist if more than one js file is used)
+
+Network tab - JS files
+extn-utls.js, installHook.js, react-dev-tools.js - Chrome extension file
+index.js - has request URL (all code, components, hooks is bundled, minified, compressed, optimized, obfuscated together);
+The size of index.js file is large during development and small during production.
+
+Make My Trip: Primary job is to book flights. Secondary job is to book hotels, homestays, trains, etc.
+For a big app like Make My Trip, Explore More component. Each tab has so many components (hundred of them).
+If our bundler took the code of all components and put it in one index.js, it will make our app slow. Because the size of index.js is huge.
+It would not make sense to put all our components in one js file.
+
+Large scale prod apps will not work by creating just one bundle. We need to do chunking (or code splitting or dynamic bundling or Lazy loading
+or On Demand Loading)
+
+On the first day, you need to understand and contribute to their repository. So you know how these large scale companies work, how code is managed, and why these apps are fast.
+
+Is bundling good or bad? Its good to a limit. You cannot bundle everything into our app. We need to make logical bundles to our app.
+
+We need to make our bundle size small but logical.
+
+We hear a lot of times that it is just one line of code, it will not make much difference. It is not true
+
+A few lines of code can optimize our production ready app to a whole new level.
+
+Most times, we don't want to break the experience of the user and do not want to burden the users with a large bundle size file. We want to keep our bundle size small but logical.
+
+Most times, when users visit a site, the users come with an intent to book flight. 
+
+How many visit to book a flight - 80/90 out of 100
+How many visit to book a train - 10/12
+
+When users visit to book a flight, will they need to go to buses or trains or cabs. Most times, it makes a lot of sense to not go to other modes of transport.
+
+Suppose flight has 100 components, trains has 100 components. So, if a user visits a site to book flights, we load the 200 components for all modes of transport. Is it a good idea?  Its not a good idea
+
+So, generally in your large scale applications, we build different chunks, we build different bundles based on the use cases. It is upon the developer's wisdom. A senior engineer, the tech architects, they do a system design.
+
+Tip: This will help in your system design interviews. Tell the interviewer that when you are designing for makemytrip, code splitting will be used for all of the components, 
+that when I am using webpack or parcel bundles, I will make sure that my bundle does not use random code. Let the interviewer know why we need bundling and that too logical bundling.
+
+If the interviewer asks for the online, offline thing, you will tell interviewer that you will build a hook for it.
+
+Make my trip is a image heavy site, I will keep images over CDN, I will cache it, compress it. Look for these things in system design round
+
+Give smart answers to interviewer, show them that you can code better, you are better than other React developers.
+
+Now lets build the feature that we need to load, when our home page loads, just build the bundle for flights component. 
+
+Only when user clicks on train, load the code with the bundle for train related components and it should render
+
+Throw Jargons at the interviewer: We will do on demand loading of our bundles, we will do bundle chunking, we will do dynamic import, code splitting. Everything is same. This makes a huge difference.
+
+I will take time to go to indian start ups and try to reason, go to their website and see what is happening. what it takes to make a website like make my trip, can I build a website like make my trip.
+
+Paytm - each icon (recharge, movie tickets, UPI) is all different bundles.
+
+Swiggy - Should Restaurant Menu be a different bundle? 
+        Should Instamart of Swiggy be a different bundle?
+
+Assume that instamart has 100s of components inside it. When I am teaching, I want to write every small thing so you understand every line of code. Assume that this is a big application has so many components, so many api calls, so many data calls, so many hierarchy. Similar to our body has so many nested components.
+
+Instamart is currently inside index.js. Where ever we have the route or import at Instamart, there we need to lazy load, do dynamic import.
+
+use lazy function from react to split the bundle. Lazy is for lazy loading. Its for dynamic import. lazy is a named import from react.
+
+lazy takes a function and now we will do a dynamic import. It is an import function with argument as the component path.
+
+
+
+Observe that instamart.js is loaded in network tab on demand. (On demand loading, on demand import, dynamic import, lazy loading, bundle chunking, code splitting)
+
+When any body says what one line of code can do? Show them this code. This will just do a lazy load
+
+ It has not fully loaded yet, this is throwing a beautiful error. Oops!! Something went wrong. 
+ How is this error coming up. This is coming from Error router.
+
+ HW: Why this error is coming? When you click on Instamart, this is a different bundle altogether. It takes some time to load the script. Meanwhile, React tries to render somehting which is not there. In this process, React suspends the rendering. 
+ 
+ Tip => Remember: When you are loading this component on demand, React tries to suspend it. 
+ 
+ Upon on demand loading, React does not know there is a code for Instamart. It just knows there is a link that goes to instamart code. When we click on Instamart link, it dynamically loads it. 
+
+Amazing question: HOw did it load the second time. Once you have this code in the browser, I can go to the component. Not cache. The correct answer is its still an SPA. Once the page is loaded, its not changing its page. Go back to Instamart anytime, now instamart is loaded.
+
+In makemytrip, if I go to train, train component is there. If I go to flight component, the flight component is still there. It does not even reload the second time and show the shimmer. Observe only data below reloads, searc box does not reload. Because it is already reloaded.
+
+So why was it giving the error for the first time. It is giving error because if I click on Instamart, it will try to render the components that are not even there, React will suspend loading. The code came after 27 ms. But react was trying to render it even before 27 ms.
+
+The second time when we go to home and navigate back to Instamart. Because once we have code in the browser, I can go 
+
+When loading component on demand, React tries to suspend it. We use Suspense import from React.
+
+It is a suspense whether Instamart will load or not. If we load the Instamart as Suspense, go to instamart the first time, React will load instamart.
+
+When we write Suspense, React takes care of these components in a different fashion. React knows that these components will be lazy loaded, they will be dynamically loaded. It waits fort the promise to be resolved. import function is a promise.
+
+HW: Go read about import function as a promise.
+
+React waits for the promise to be resolved, until it loads the component. Instamart loaded in 12 ms but if Instamart has many components, it might take 1-2 ms, what should we show over here? We should show a shimmer.
+
+React exactly knows when there is a suspense, what exactly will be loaded. React takes a prop known as fallback. We can pass in whatever we need to show until Instamart is loaded.
+
+When user visits Amazon to buy mobile phones, the user might not go to fashion or electronics. So we can keep different bundles of our application in different chunks. We can do chunking on the basis of different parts of our app.
+
+Is chunking really necessary for small apps? No need. Only when we think our bundle size is going huge, we need to do chunking.
+
+Why I am telling all that because you should know how to do chunking. When you are building a huge application, like makemytrip or paytm.
+
+Build facebook.com, youtube.com
+
+Steps:
+1. Call lazy import and use import function to lazy load the component.
+2. Remove existing named import 
+3. Create Suspense.
+4. Add the props fallback to Suspense.
+
+Now you know why large scale applications are fast. Why the size of their bundles does not explode. 
+
+HW: Create your own hooks.
+
+We created our useRestaurant hook, we created a useOnline hook to offload the functionality to those hooks, why and how do we create a custom hook, custom hook, when do we need a custom hook.
+
+how and why lazy loading, chunking, bundle splitting.
+
+Reminder: Never ever dynamically load your component inside another component.
+
+DO NOT LAZY LOAD A COMPONENT INSIDE ANOTHER COMPONENT. Why not lazy load inside a component? This will lazy load after every render cycle.
+
+Always do lazy loading near the import statements.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
