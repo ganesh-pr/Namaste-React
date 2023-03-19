@@ -257,4 +257,4 @@ export const RESTAURANT_FETCH_ERROR =
   "Unable to display restaurants. Please try again";
 
 export const RESTAURANT_MENU_API =
-  "https://www.swiggy.com/dapi/menu/v4/full?lat=17.385044&lng=78.486671&menuId=";
+  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&lat=17.385044&lng=78.486671&restaurantId=";

@@ -6,13 +6,7 @@ import useOnline from "../utils/useOnline";
 const Title = () => {
   return (
     <a href="/">
-      <img
-        src={Food_Villa_New}
-        width="80px"
-        height="80px"
-        alt="Food"
-        srcSet=""
-      />
+      <img src={Food_Villa_New} className="h-28 px-2" alt="Food" srcSet="" />
     </a>
   );
 };
@@ -22,30 +16,40 @@ const Header = () => {
   const isOnline = useOnline();
   return (
     <>
-      <div className="header" style={{ backgroundColor: "yellow" }}>
+      <div className="flex justify-between bg-cyan-200 shadow-2xl shadow-blue-50 sm:bg-emerald-200">
         <Title />
-        <ul className="nav-items">
-          <Link to="/">
-            <li>Home</li>
-          </Link>
-          <Link to="/about">
-            <li>About Us</li>
-          </Link>
-          <Link to="/contact">
-            <li>Contact Us</li>
-          </Link>
-          <Link to="/cart">
-            <li>Cart</li>
-          </Link>
-          <Link to="/instamart">
-            <li>Instamart</li>
-          </Link>
+        <ul className="flex py-10">
+          <li className="px-3">
+            <Link to="/">Home</Link>
+          </li>
+          <li className="px-3">
+            <Link to="/about">About Us</Link>
+          </li>
+          <li className="px-3">
+            <Link to="/contact">Contact Us</Link>
+          </li>
+          <li className="px-3">
+            <Link to="/cart">Cart</Link>
+          </li>
+          <li className="px-3">
+            <Link to="/instamart">Instamart</Link>
+          </li>
         </ul>
-        <h1>{isOnline ? "✅" : "🔴"}</h1>
+        <h1 className="py-10">{isOnline ? "✅" : "🔴"}</h1>
         {isLoggedIn ? (
-          <button onClick={() => setIsLoggedIn(false)}>Logout</button>
+          <button
+            className="p-2 m-2 bg-purple-600 hover:bg-cyan-300 rounded-xl"
+            onClick={() => setIsLoggedIn(false)}
+          >
+            Logout
+          </button>
         ) : (
-          <button onClick={() => setIsLoggedIn(true)}>Login</button>
+          <button
+            className="p-2 m-2 bg-purple-600 hover:bg-cyan-300 rounded-xl"
+            onClick={() => setIsLoggedIn(true)}
+          >
+            Login
+          </button>
         )}
       </div>
     </>

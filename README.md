@@ -960,6 +960,333 @@ DO NOT LAZY LOAD A COMPONENT INSIDE ANOTHER COMPONENT. Why not lazy load inside 
 Always do lazy loading near the import statements.
 
 
+L10 - Jo Diktha hai wo bhiktha hai
+
+How to make your web apps look good? By writing CSS
+
+How to write CSS in your web projects?
+
+CSS, Bootstrap, Material.
+
+We will use tailwind css
+
+AS never used tailwind in production. A few used bootstrap, or material. Uber uses Base UI. Base Web React UI framework.
+
+Should we use frameworks? Yes
+
+But why? - 1. To write optimized CSS, and 2. it saves time.
+
+Our app has index.css. This is one way. No matter what the component is, we were styling it in one large css file. This is a basic way for writing css.
+
+Second way is to write scss or sass files instead of css files. Read more about scss and sass
+
+Advantages of using scss and sass: Nesting, mixins, reusability, variables.
+
+SCSS is a different way of writing css. At the end of the day, SCSS is converted to our basic CSS. 
+
+Just like we have JSX converts to HTML. SCSS is converted to CSS.
+
+Third way is inline CSS. JSX style takes a JS object. 
+
+Why two curly braces? We are passing a JS object inside of JSX which is a Javascript which needs a curly brace. This is a faster and easier way to write CSS.
+
+One answer is reusability, repetition, hard coding. It is difficult to maintain because we are hardcoding and we cannot reuse these classes.
+
+It would be difficult to find where the code is written. It is a heavy job for our browsers. This is one more thing. The job of processing inline css is heavy for the browsers to understand. This is not a good way to write the CSS. Always avoid writing inline CSS.
+
+In fact, writing CSS in class name is better way of writing CSS than writing CSS in inline CSS.
+
+The fourth way is to use libraries like Material-UI. 
+
+HW: Who maintains material-ui. 
+
+Material UI is a fully loaded component library. A lot of companies heavily rely on libraries for building UI. 
+
+Similarly, other frameworks  such as Base UI (from Uber) and Ant Design.
+
+Should we use these libraries and frameworks? 
+
+Pros: Easy to use, reusable (no need to write a lot of css). Make buttons more reusable. Spend more time on logical things such as customizing.
+
+Eg: Buttons should have rounded corners.
+
+IQ:  Saves a lot of time. Automatic theming. Gives us built in components, consistent UI.
+
+Different ways to style your web apps? Which way will you use? We will have consistent UI. All the apps will look the same now.
+
+All buttons will look the same. Youtube made a major change in the UI. They turned all their buttons to rounded corners.
+
+Youtube made all buttons including subscribe to rounded corners. Previously, it used to be a red color and a rectangle shape.
+
+If they did not use library, it would be a pain to modify all buttons.Using a library gives us a consistency when we are using css.
+
+Material UI, Base UI, Fluent UI, Ant Design, Chakra UI. It depends on how you do.
+
+Some companies use their own UI framework.
+
+Can we use more than one UI framework in the project? At the end of the day, each library is a package. We can use multiple packages in a project.
+
+Should we use it? It does not make sense.One button to look one way and other to look another way. We need to be consistent when building our UI. We need to have uniformity to make it look like that. It is not a good practice to use it.
+
+Every website has its own vibe. That vibe is created by styling. It is very important.
+
+A lot of companies focus upon design. 
+
+Go learn your CSS on your own. 
+
+1. To have a css
+2. To have a scss or sass
+3. To have inline css (Javascript Object)
+4. To use libraries (or component libraries or UI libraries): MUI, Base UI, Ant, Chakra, Bootstrap
+5. Styled components (frequently used in React)
+
+6. Tailwind CSS framework
+
+Most companies use libraries.
+
+Cons of using libraries: Makes our Bundle size heavy. We lose a lot of control over how my design looks. I am forced to use buttons in a predefined way. It makes development easy and fast but customizing it takes a lot of time. I have seen this happening lot of times in the industry.
+
+Personal painpoint: Date time picker becomes pain. I was there at a company and I was using a library. We need to apply a lot of customization over these components.
+
+Every library has its own date time picker. We need to apply a lot of customization over these components when design team asks for a different style.
+
+Floating text from box to the top does not work in lot of devices. Whenever using framework or library, it restricts us in some way. This is a major con of using the library or framework.
+
+Big advantage of using a library or framework is it makes development very fast, and you can build a lot of stuff very fast. Suppose 10 developers are working on the same project. It keeps everything consitent across all developers.
+
+It takes care of your responsiveness. Look and feel is aligned specific to desktop and aligned specific to mobile
+
+This is another way of styling components inside React application.
+
+Tip***: Pros and Cons of all of the style types, why to write and not to write, what is the use of component libraries and not the use of component libraries. Know the basics of all of these.
+
+
+Tailwind CSS framework.
+
+Why, When, How to use it
+Pros and Cons
+How do we configure our project to use tailwind css
+
+Earlier, in the older times, we had separate files for HTML, CSS, and JS
+
+With JSX, we are writing HTML code inside JS. 
+
+Let us bring CSS also inside our JS files and that is why styled components came in.
+
+Go read at styled-components.com
+
+Con of styled-components is it comes with a learning curve, its a different way of writing code. Easier to pick up but less used in the industry. Looks less verbose and less readable to me.
+
+Catching up fast.
+
+Pro of inline CSS: Time saving
+  - Write CSS on the go (in the same file).
+
+Tailwind gives the same feature
+  - Write CSS on the go (in the same file)
+  - Reusability
+  - Pre-built classes
+  - Less bundle size (Not many pre-built components in the bundle as it is minimal CSS it offers to us)
+  - Flexible UI (Customizations)
+  - Very good documentation
+  - Library framework agnostic. Works with normal JS also.
+
+  Tailwind CSS is a package. Can be loaded into our index.html
+
+When writing CSS, Tailwind CSS overrides the existing styles. Need to write in tailwind css
+
+Styles are missing for Blue anchor links are missing, h1 tag, input box.
+
+Tailwind is the beast, its a bully.
+
+Tailwind CSS works only with class names. Every style will be a new class name.
+
+Everything in Tailwind works with class name.
+
+How to write the class names? Can be found in documentation.
+
+Quick search is a really useful feature.
+
+To skip using cdn, look at Getting Started > installation section >> framework guides.
+
+HW: Read about PostCSS
+
+PostCSS is to compile these classes. Tell parcel that we are using tailwind classes and we need parcel to compile. So the compiled classes can be read by the browser.
+
+npx gives a tailwind.config.js
+
+HW: What do each of the lines in tailwind.config.js mean?
+
+1. Instaill tailwind and postcssrc
+tailwind.config.js:
+content: [What files will use the tailwind css]. When compiling, just use these files.
+
+postcssrc: Tell bundler, tell parcel that while bundling things, when building up production or development build, we will be using tailwind, compile our tailwind css into normal css.
+
+2.  Tailwind init > tailwind.config.js
+
+3. No css inside index.css. Only three lines will be there.
+
+Tailwind base - all classes which are there in base chunk, for the components and for the utilities. Like import inside css
+
+@tailwind - We need to include this. This is where the project is using tailwind. Whenever parcel or bundler is reading index.css, @tailwind -> it figures out the classes.
+
+Make sure you are on the latest version of node, parcel, tailwind and all 
+
+No need to remember class. Tailwind Css intellisense extension will give suggestions. Hover on p-2 for exact value
+
+padding-y to nav elements to bring it to the center of header
+
+py - padding on y-axis
+
+padding-x to each nav element to provide space between elements.
+px- padding on x-axis
+
+justify between to have logo, navigation elements and login button to be spaced
+
+To give a precise number, height or width. use square bracket
+
+h-[200px]
+
+Refer to network tab -> index.css
+
+Observe that pre-defined styles are compiled.
+
+Who is doing this stuff? Parcel is doing this stuff. Parcel is taking help of postcss and tailwind library to compile all those classes and ship it into our project.
+
+Tailwind CSS will ensure that you will only include the classes used in your project will be shipped to production.
+
+It makes the CSS very small.
+
+A dynamic class for 200px is created for us.
+
+Best practice is to stick to the native tailwind classes:
+1. Tailwind understands it and it will be less code and maintain consistency. 
+2. In old way, find the button class, search in css, update the button color. Many times developers write their own green button. Remembering the names and following conventions is difficult.
+
+HW: Search for hover.
+
+CSS file will include the style. We do not need to worry about optimization. Parcel, postcss, tailwind are all doing it for us.
+
+Tailwind also works with HMR
+
+Media queries: small (phone), medium (tab), large (laptop)
+
+When my threshold changes, change my background to blue.
+
+HW: Small device should have the button center aligned and the logo at the center
+
+Pros of Tailwind:
+Easy to debug
+Code is less
+no duplicate css
+bundle size is small.
+Faster development
+Gives us a lot more control over things.
+Newer way of writing CSS
+We do everything in JS file
+
+Con of Tailwind:
+There is a high learning curve. Every new developer will take some time to understand and be productivity.
+Too many classes
+It compromises readability a little
+
+Tailwind has its pros and cons
+MUI has its pros and cons
+If I am working on a start up, I would love to use Tailwind. If it is a product for 10 years, I would not prefer it.
+
+*** Tip: Explore all css styles
+
+HW: Write all Tailwind CSS in the application.  Be very confident , exactly know why and what you are choosing a framework, pros and cons of the framework and have a healthy debate with the interviewer.                                                                                                       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

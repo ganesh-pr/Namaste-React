@@ -19,24 +19,37 @@ const RestaurantMenu = () => {
   return !restaurantDetail ? (
     <Shimmer />
   ) : (
-    <div className="detail">
-      <div>
-        <h1>Restaurant Id: {id}</h1>
-        <h2>{restaurantDetail?.name}</h2>
-        <img src={IMG_CDN_URL + restaurantDetail?.cloudinaryImageId} />
-        <h2>{restaurantDetail?.area}</h2>
-        <h2>{restaurantDetail?.city}</h2>
-        <h2>{restaurantDetail?.avgRating} Stars</h2>
-        <h2>{restaurantDetail?.costForTwo}</h2>
+    <div className="flex">
+      <div className="m-10">
+        {/* <h1 className="font-bold text-2xl">Restaurant Id: {id}</h1> */}
+        <h2 className="font-bold text-xl">
+          {restaurantDetail?.restaurantInfo?.name}
+        </h2>
+        <img
+          className="my-5"
+          src={
+            IMG_CDN_URL + restaurantDetail?.restaurantInfo?.cloudinaryImageId
+          }
+        />
+        <h2 className="text-xl">{restaurantDetail?.restaurantInfo?.city}</h2>
+        <h2 className="text-xl">
+          {restaurantDetail?.restaurantInfo?.avgRating} Stars
+        </h2>
+        <h2 className="text-xl">
+          {restaurantDetail?.restaurantInfo?.costForTwo / 100} INR
+        </h2>
       </div>
-      <div>
-        <h1>Menu</h1>
-        <ul>
-          {restaurantDetail &&
-            restaurantDetail?.menu &&
-            Object.values(restaurantDetail?.menu?.items).map((item) => (
-              <li key={item.id}>{item.name}</li>
-            ))}
+      <div className="mx-auto mt-10">
+        <h1 className="text-xl font-bold">Menu</h1>
+        <ul className="list-disc">
+          {restaurantDetail?.restaurantMenuItems &&
+            Object.values(restaurantDetail?.restaurantMenuItems).map(
+              ({
+                card: {
+                  info: { id, name },
+                },
+              }) => (console.log("item", id), (<li key={id}>{name}</li>))
+            )}
         </ul>
       </div>
     </div>
