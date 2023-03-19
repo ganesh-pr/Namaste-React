@@ -24,8 +24,8 @@ class About extends React.Component {
     console.log("Parent - Render");
     return (
       <div>
-        <h1>About Us Page</h1>
-        <p>
+        <h1 className="font-bold text-xl p-5">About Us Page</h1>
+        <p className="p-5">
           This is the Namaste React Live Course Chapter 07 - Finding the path
         </p>
         {/* <ProfileFunctionalComponent name="FV Ranga"></ProfileFunctionalComponent> */}
