@@ -12,7 +12,7 @@ import useOnline from "../utils/useOnline";
 
 const RestaurantList = ({ restaurants }) => {
   return (
-    <div className="flex flex-wrap h-auto ">
+    <div className="flex flex-wrap h-auto m-auto">
       {restaurants.map((res) => {
         return (
           <Link to={"restaurant/" + res?.data.id} key={res?.data.id}>
@@ -70,7 +70,7 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container py-5 px-3 my-4 bg-emerald-200">
+      <div className="search-container py-5 px-3 my-4 bg-purple-200">
         <input
           type="text"
           name="Search"
@@ -87,7 +87,7 @@ const Body = () => {
           ((a = 10), console.log(a))
         }
         <button
-          className="p-2 m-2 bg-purple-600 hover:bg-cyan-300 rounded-xl"
+          className="p-2 m-2 bg-blue-700 text-white hover:bg-cyan-300 rounded-xl"
           onClick={() => {
             console.log(searchTxt);
             const filteredRestaurants = filterRestaurantData(
