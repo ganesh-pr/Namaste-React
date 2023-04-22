@@ -65,8 +65,8 @@ const Body = ({ user }) => {
   //   return <h1>🔴 Offline, please check your internet connection!!</h1>;
   // }
 
-  console.log("render");
-
+  console.log("render", allRestaurants);
+  console.log("errorMessage", errorMessage);
   //Avoid rendering
   //if (!allRestaurants) return null;
 
@@ -89,10 +89,7 @@ const Body = ({ user }) => {
             setSearchTxt(e.target.value);
           }}
         />
-        {
-          // Expression
-          ((a = 10), console.log(a))
-        }
+
         <button
           className="p-2 m-2 bg-blue-700 text-white hover:bg-cyan-300 rounded-xl"
           onClick={() => {
