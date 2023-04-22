@@ -10,13 +10,13 @@ import { Link } from "react-router-dom";
 import { filterRestaurantData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 
-const RestaurantList = ({ restaurants }) => {
+const RestaurantList = ({ restaurants, user }) => {
   return (
     <div className="flex flex-wrap h-auto m-auto">
       {restaurants.map((res) => {
         return (
           <Link to={"restaurant/" + res?.data.id} key={res?.data.id}>
-            <RestaurantCard {...res?.data} />
+            <RestaurantCard {...res?.data} user={user} />
           </Link>
         );
       })}
@@ -24,13 +24,20 @@ const RestaurantList = ({ restaurants }) => {
   );
 };
 
-const Body = () => {
+const Body = ({ user }) => {
   // let searchTxt = "KFC"; - Creating a local variable in JS
   const [allRestaurants, setAllRestaurants] = useState([]); //Creating a local state variable in react
   const [filteredRestaurants, setFilteredRestaurants] = useState([]); //Creating a local state variable in react
   const [searchTxt, setSearchTxt] = useState("Kwality");
+  const [user1, setUser1] = useState(user);
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    setTimeout(() => {
+      const email = "test";
+      setUser1({ name: user.name, email: email });
+    }, 10000);
+  }, []);
   // useEffect(() => {
   //   console.log("search is updated");
   // }, [searchTxt]);
@@ -101,7 +108,7 @@ const Body = () => {
         </button>
       </div>
       {filteredRestaurants.length > 0 ? (
-        <RestaurantList restaurants={filteredRestaurants} />
+        <RestaurantList restaurants={filteredRestaurants} user={user1} />
       ) : (
         <h1>No Restaurants found</h1>
       )}

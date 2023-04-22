@@ -49,7 +49,14 @@ const appRouter = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Body />,
+        element: (
+          <Body
+            user={{
+              name: "Namaste React",
+              email: "ganesh@reactdev.com",
+            }}
+          />
+        ),
       },
       {
         path: "/about",
@@ -93,3 +100,12 @@ const appRouter = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(<RouterProvider router={appRouter} />);
+
+/**
+ *
+ * AppLayout
+ *  state=user
+ *     - Body user={user}
+ *        - RestaurantCard user={user}
+ *           - <h4> {user}</h4>
+ */
