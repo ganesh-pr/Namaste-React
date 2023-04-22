@@ -52,8 +52,8 @@ const Body = ({ user }) => {
     let list = await data.json();
     console.log(list);
     if (list.statusCode !== 1) {
-      setAllRestaurants(list?.data?.cards?.[2]?.data?.data?.cards);
-      setFilteredRestaurants(list?.data?.cards?.[2]?.data?.data?.cards);
+      setAllRestaurants(list?.data?.cards?.[1]?.data?.data?.cards);
+      setFilteredRestaurants(list?.data?.cards?.[1]?.data?.data?.cards);
     } else {
       setErrorMessage(RESTAURANT_FETCH_ERROR);
     }
