@@ -1199,6 +1199,213 @@ If I am working on a start up, I would love to use Tailwind. If it is a product 
 
 HW: Write all Tailwind CSS in the application.  Be very confident , exactly know why and what you are choosing a framework, pros and cons of the framework and have a healthy debate with the interviewer.                                                                                                       
 
+L11_DataIsTheNewOil
+Redux, State management, useContext api, useReducer, redux toolkit
+
+Handling data is the most crucial part of the web application.
+
+The view on the screen is the UI layer (button, borders, text boxes)
+Other layer is the data layer
+
+Both these layers help in build our front end web application. (Built using frameworks such as Angular, React)
+
+Babel converts JSX into one big plain JS object. The JS Object is part of the virtual DOM. Role of virtual DOM is Reconciliation.
+Diff is between the previous virtual DOM and the new virtual DOM. If a new node is added to the tree, the new diff is replicated into the actual DOM in the HTML.
+
+The whole UI layer is powered by the data layer. The data layer consists of state and the props. We manage the UI with state and props. 
+
+Diff between state and props -> Suppose we want a variable to have scope only within the component, it is the local variable and is called state. Prop is the data passed from one component to another. props are the kind of local state for our parent.
+
+filteredRestaurant lives within the body and inside body, I am passing it down the component as a prop.
+
+How to pass data from AppLayOut to the RestaurantCard -> Props from AppLayOut to Body to RestaurantCard
+
+/*
+AppLayOut
+ (state=user)
+    - Body user = {user}
+        - RestaurantCard user = {user}
+          - <h4>{user.name}</h4>
+*/
+
+In real world, there will be many levels of hierarchy. It is like a chain. When data is passed down from parent to child and then to its child and then to its child, the whole passing of props down the chain is known as props drilling.
+
+React developer tools is an important extension. Components and Profiler in Dev Tools. 
+
+RouterProvider is done by react-router-dom. 
+
+On the components tab, clicking on RestaurantCard will display the data. Helps in differentiating API issue or UI issue.
+
+left pane is UI layer, right pane is data layer. data is powering the UI layer. No need to search in the code for props and state.
+
+What if I want to pass data from child to parent?
+ Many ways but less cases where data needs to be passed from child to parent
+ 1. Local storage but it is not a good way
+ 2. We can build a custom hook. But building hooks for all data needs is not a viable.
+ 3. Redux
+
+ Data is more crucial part of our application management. Data management will decide if our app is good, scalable, reusable or not.
+
+Data is the new oil. 
+
+Is props drilling a good way?
+
+Body does not need user info, but it still needs to be passed. It makes code clutter. Upto three levels, its okay.
+
+If we need data under 10 levels, it is not a good way. One more disadvantage is if one thing changes, one time the prop changes, it re-renders all the child components using that props and it makes our code cluttered.
+
+It is unnecessary code, unnecessary variables into our app. 
+
+1:04
+
+Build a show and hide button to display or hide a card
+Build a feature that one accordion closes the other two accordions.
+
+About, Team, Careers are section components. Each component has its own state and own props. 
+
+Do these components share state? No. They do not share state. 
+
+Section components are similar to siblings who might not listen to each other. We will have a parent.
+I will take the control from the children to parent. We can do it by lifting the state up. 
+This is a scenario where we will control the interaction between all these components.
+
+Parent Instamart will control which section needs to be shown and which section needs to be hidden.
+
+useState will take object with three keys. We will pass setIsVisible as a props from the parent component.
+
+That is why people say code is garbage. That is why people don't let interns push code to production.
+
+An end user will think the code written is working fine. 
+
+What I want you to realize is data is the new oil. There is a UI layer, there is a data layer. You cannot build a large scale application by not having control over a proper data mechanism.
+
+What is the condition of this scenario? We have to show only one item at a time. We just need to track what needs to be shown.
+
+1. Create different keys for your section: Keys can be name of the section or index of the section
+
+Q: Difference between callback and promise
+Q: Difference between statement and expressions
+
+Even google timer is maintaining state, click on a youtube video, come back and observe that clock is maintaining state.
+
+Review: Props drilling, lifting the state up, how important is the data layer, modifying the ui layer using data layer, React dev tools (state, props, data that is powering the UI)
+
+Large scale application with so many components -> debugging becomes difficult. Profiling records the whole journey.
+
+Rendering time using profiler can help in making our app performant, how component is rendered, read the links.
+
+Ranking. 
+
+Read: Watch videos of React profiler
+
+New Topic:
+How to use an object across all your components. We need to store it in a central space. 
+
+Local storage is inside browser, is not reliable, and updating local storage is a heavy operation
+
+React gives us access to this central space known as React context, where we can store the data.
+
+Some big companies also use Redux store. It is a shared state for whole app. Any component can use that data.
+
+Mobex, ngRx, Redux, Flux are state management libraries.
+
+React has its own context. Why? I want piece of data to be accessible anywhere in the app.
+
+Can we create global variables? Yes, but React is not tracking it. React will not trigger its reconciliation.
+
+React context is super powerful thing. Keep new context in a new file.
+
+createContext is a function. Takes in data needed all across your application.
+
+Takes the default value of our context. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
