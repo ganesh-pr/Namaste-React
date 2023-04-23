@@ -2,6 +2,7 @@ import {
   RestaurantListData,
   RESTAURANT_FETCH_ERROR,
   SWIGGY_API_URL,
+  RESTAURANT_LIST_ERROR_CODE,
 } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
@@ -11,6 +12,7 @@ import { filterRestaurantData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
 
 const RestaurantList = ({ restaurants, user }) => {
+  console.log("res", restaurants);
   return (
     <div className="flex flex-wrap h-auto m-auto">
       {restaurants.map((res) => {
@@ -51,9 +53,13 @@ const Body = ({ user }) => {
     console.log(data);
     let list = await data.json();
     console.log(list);
-    if (list.statusCode !== 1) {
-      setAllRestaurants(list?.data?.cards?.[1]?.data?.data?.cards);
-      setFilteredRestaurants(list?.data?.cards?.[1]?.data?.data?.cards);
+    if (list.statusCode !== RESTAURANT_LIST_ERROR_CODE) {
+      list?.data?.cards.forEach((restaurantListCard) => {
+        if (restaurantListCard?.cardType === "seeAllRestaurants") {
+          setAllRestaurants(restaurantListCard.data?.data?.cards);
+          setFilteredRestaurants(restaurantListCard.data?.data?.cards);
+        }
+      });
     } else {
       setErrorMessage(RESTAURANT_FETCH_ERROR);
     }
