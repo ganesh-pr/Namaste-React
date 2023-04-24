@@ -45,7 +45,17 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-        <h1 className="py-10">{isOnline ? "✅" : "🔴"}</h1>
+
+        {isOnline ? (
+          <h1 className="py-10" title="Your internet is active">
+            ✅
+          </h1>
+        ) : (
+          <h1 className="py-10" title="Please check your internet connection.">
+            🔴
+          </h1>
+        )}
+
         {isLoggedIn ? (
           <button
             className="p-2 m-2 bg-blue-700 text-white hover:bg-cyan-300 rounded-xl"
