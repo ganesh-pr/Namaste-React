@@ -7,6 +7,8 @@
     "build": "parcel build index.html",
     "test": "jest"
   },
+  "proxy": "https://www.swiggy.com",
+  
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ganesh-pr/Namaste-React.git"

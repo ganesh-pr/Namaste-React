@@ -3,6 +3,7 @@ import {
   RESTAURANT_FETCH_ERROR,
   SWIGGY_API_URL,
   RESTAURANT_LIST_ERROR_CODE,
+  CORS_ERROR_MESSAGE,
 } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
 import { useState, useEffect } from "react";
@@ -30,14 +31,14 @@ const Body = ({ user }) => {
   // let searchTxt = "KFC"; - Creating a local variable in JS
   const [allRestaurants, setAllRestaurants] = useState([]); //Creating a local state variable in react
   const [filteredRestaurants, setFilteredRestaurants] = useState([]); //Creating a local state variable in react
-  const [searchTxt, setSearchTxt] = useState("Kwality");
+  const [searchTxt, setSearchTxt] = useState("");
   const [user1, setUser1] = useState(user);
   const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
       const email = "test";
-      setUser1({ name: user.name, email: email });
+      //setUser1({ name: user.name, email: email });
     }, 10000);
   }, []);
   // useEffect(() => {
@@ -49,19 +50,23 @@ const Body = ({ user }) => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(SWIGGY_API_URL);
-    console.log(data);
-    let list = await data.json();
-    console.log(list);
-    if (list.statusCode !== RESTAURANT_LIST_ERROR_CODE) {
-      list?.data?.cards.forEach((restaurantListCard) => {
-        if (restaurantListCard?.cardType === "seeAllRestaurants") {
-          setAllRestaurants(restaurantListCard.data?.data?.cards);
-          setFilteredRestaurants(restaurantListCard.data?.data?.cards);
-        }
-      });
-    } else {
-      setErrorMessage(RESTAURANT_FETCH_ERROR);
+    try {
+      const data = await fetch(SWIGGY_API_URL);
+      console.log(data);
+      let list = await data.json();
+      console.log(list);
+      if (list.statusCode !== RESTAURANT_LIST_ERROR_CODE) {
+        list?.data?.cards.forEach((restaurantListCard) => {
+          if (restaurantListCard?.cardType === "seeAllRestaurants") {
+            setAllRestaurants(restaurantListCard.data?.data?.cards);
+            setFilteredRestaurants(restaurantListCard.data?.data?.cards);
+          }
+        });
+      } else {
+        setErrorMessage(RESTAURANT_FETCH_ERROR);
+      }
+    } catch (e) {
+      setErrorMessage(CORS_ERROR_MESSAGE);
     }
   }
 
@@ -78,7 +83,20 @@ const Body = ({ user }) => {
 
   // Conditional rendering using ternary operator
   return errorMessage ? (
-    <h4 class="error-message">{errorMessage}</h4>
+    errorMessage === CORS_ERROR_MESSAGE ? (
+      <>
+        <h4 class="error-message cursor-pointer">{errorMessage}</h4>
+        <a
+          class="cursor-pointer underline text-sky-600"
+          href="https://chrome.google.com/webstore"
+          target="_blank"
+        >
+          URL: https://chrome.google.com/webstore
+        </a>
+      </>
+    ) : (
+      <h4 class="error-message cursor-pointer">{errorMessage}</h4>
+    )
   ) : allRestaurants?.length === 0 ? (
     <Shimmer />
   ) : (
