@@ -52,7 +52,7 @@ const Body = ({ user }) => {
   async function getRestaurants() {
     try {
       const data = await fetch(SWIGGY_API_URL);
-      console.log(data);
+      console.log("line 55", data);
       let list = await data.json();
       console.log(list);
       if (list.statusCode !== RESTAURANT_LIST_ERROR_CODE) {
