@@ -1,7 +1,8 @@
 import Food_Villa_New from "../assets/img/Food_Villa_New.png";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const Title = () => {
   return (
@@ -14,6 +15,9 @@ const Title = () => {
 const Header = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const isOnline = useOnline();
+
+  const { user } = useContext(UserContext);
+
   return (
     <>
       <div className="flex justify-between bg-cyan-200 shadow-2xl shadow-blue-50 sm:bg-purple-200">
@@ -45,7 +49,7 @@ const Header = () => {
             </Link>
           </li>
         </ul>
-
+        <h1 className="p-10 font-bold text-red-900">{user.name}</h1>
         {isOnline ? (
           <h1 className="py-10" title="Your internet is active">
             ✅

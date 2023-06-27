@@ -11,6 +11,7 @@ import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
 import Shimmer from "./components/Shimmer";
+import UserContext from "./utils/UserContext";
 
 const Instamart = lazy(() => import("./components/Instamart"));
 // Upon On Demand loading -> upon render -> suspend loading
@@ -32,11 +33,23 @@ const AppLayOut = () => {
 
   //const About = lazy(() => import("./components/About"));
 
+  const [user, setUser] = useState({
+    email: "ganesh@reactdev.com",
+    name: "Ganesh",
+  });
+
   return (
     <>
-      <Header />
-      <Outlet />
-      <Footer />
+      <UserContext.Provider
+        value={{
+          user: user,
+          setUser: setUser,
+        }}
+      >
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
     </>
   );
 };

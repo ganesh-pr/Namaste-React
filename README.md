@@ -1290,7 +1290,7 @@ Even google timer is maintaining state, click on a youtube video, come back and 
 
 Review: Props drilling, lifting the state up, how important is the data layer, modifying the ui layer using data layer, React dev tools (state, props, data that is powering the UI)
 
-Large scale application with so many components -> debugging becomes difficult. Profiling records the whole journey.
+Large scale application with so many components -> debugging becomes difficult. Profiling records the whole session, records the whole user journey.
 
 Rendering time using profiler can help in making our app performant, how component is rendered, read the links.
 
@@ -1303,21 +1303,137 @@ How to use an object across all your components. We need to store it in a centra
 
 Local storage is inside browser, is not reliable, and updating local storage is a heavy operation
 
-React gives us access to this central space known as React context, where we can store the data.
+React gives us access to this central space known as React context, where we can store the data. State can be used by all components.
 
 Some big companies also use Redux store. It is a shared state for whole app. Any component can use that data.
 
 Mobex, ngRx, Redux, Flux are state management libraries.
 
-React has its own context. Why? I want piece of data to be accessible anywhere in the app.
+React has its own context. Why? I want piece of data to be accessible anywhere in the app. This is like the central place where we can keep the app. 
 
-Can we create global variables? Yes, but React is not tracking it. React will not trigger its reconciliation.
+Can we create global variables? Yes, but React is not tracking it. React will not trigger its reconciliation. React is not watching it. It will not be spying over things.
 
-React context is super powerful thing. Keep new context in a new file.
+At the end of the day, createContext is a function.
 
-createContext is a function. Takes in data needed all across your application.
+React context is super powerful thing done by React. Keep new context in a new file in utils folder. 
+
+Import createContext from react
+
+createContext is a function. Takes in some data needed all across your application.
 
 Takes the default value of our context. 
+
+2:15
+
+At the end of the day, createContext is a function, useContext is also a helper function.
+
+We can create many contexts in an application. I can create a context for my card, I can create a context for random location info, for footer, for rating.
+
+The difference between normal state and props is they are tied to a component. createContext is not tied to a component.
+
+Can we use Username instead RestaurantCard. RestaurantCard is inside the App > Body > Restaurant > RestaurantCard
+
+This is so easy than drilling the props
+
+State and props are tied to the component. Context is central store. You don't use Context everywhere. You use Context for data that is required all across the application for different, different components. Its like central data for all your components. Context is like useState for the whole application. Its like a user store
+
+What is useContext - Its a hook. Does class components have hook?  No 
+
+How to access Context inside class components? We will create a component UserContext.Consumer and that will have the value of UserContext email and name
+
+What if I want to update the context in functional component? Just as we can use UserContext.Consumer, we can use UserContext.Provider with a value
+
+In UserContext.Provider, we can override the default value. We can use it in App.js
+
+by using 
+
+<UserContext.Provider
+        value={{
+          user: user,
+        }}
+      >
+
+This is how we can override the default value.
+
+Where should I use the provider? I am using the header, footer, everywhere I am using this data. However, we can use it not the Header. Meaning I can use it only for a portion of the app. 
+
+I can pass in different data to different portions of my app. But logically, I want my whole user context to be everywhere so I am wrapping across all components.
+
+Let us play around:
+Lets create an input box which modifies the context.
+
+If your basics are strong, no body can defeat you in the interview.
+
+onChange takes in e , which is a synthetic event
+
+If we want to update one of the properties,we can update just one using the spread operator
+
+setUser({
+              ...user,
+              name: e.target.value,
+            });
+
+Each and every keypress is finding out the diff algorithm, reconciliation process is triggering, virtual DOM comparison is happening and actual DOM is modifying.
+
+Looking at profiler, 56 times reconciliation happened
+
+Profiler is recording each and every update
+
+With the information about the context, let us go to the components. Now we see DataRouter.provider, Navigator.provider. Now you know how routing is happening, how react-router-dom is working. They are using context behind the scenes. I want you developers to be so strong that you can be develop the next router for react. Somebody wrote this logic behind the scenes using context. And we always wonder how routing is happening, how useParams is working.
+
+Basics remain the same. It is all Javascript. JS does not have any context, does not have any hooks. It is all functions and objects. It is all basic Javascript. All these super powerful frameworks have been built using it.
+
+Data is the super powerful thing. UI layer is powered by a data layer. Your UI layer is powered by tailwind.
+
+Data layer is powered by context, state, props ans hooks and everything is modifying our data layer. We will see Redux which also works in the data layer, and parcel is helping bundling everything taking help of babel, taking help of everything else. These small things make react app as powerful as possible. 
+
+Looking at React dev tools, you should know where your provider is, where your consumer is. You should understand
+why DataRouter.Provider is coming. I did not write this, who wrote this. You know that react-router-dom wrote this.
+
+Lets find out our Context Provider. Our Context is written in App.js. So we can find it there in React dev components
+
+Since React dev tools always displays all contexts as Context.Provider, we can display the specific name by using
+
+UserContext.displayName
+
+This is the way we can give the displayName for debugging
+
+This has nothing to do with how the app works. 
+
+Can we have a context inside another context. Can we have multiple nested contexts. Let me show you the power of context
+
+About component is lazy loaded, the code is also not there but it is using the context. This is because the UI layer is different than the data layer. The data layer stays, the UI layer does all the work of reconciliation, rendering the component etc. Do you now understand the meaning of virtual DOM. React is keeping the data layer intactand moving the UI layer. UI about us is not even there, data layer stays, context stays. Because it is not tied to a component, it is not a state variable. UI layer and data layer everything works in parallel, everything works independently. Reconciliation is done by React.
+
+This will take 10 days to build in JS, React is giving you a very fast way to do this.
+
+It will reset the value of the context.
+
+If I refresh the value on about route, it will reset the context and it will show the default value.
+
+We are calling it Data is the new oil. World does not work without oil. App does not work without data. You have UI layer, you have data layer. Both work independently. You have to keep them in sync. 
+
+Summary: Props drilling, Lifting the state up, Build your own accordion, today we saw data, create context, update context, React profiler, React components.
+
+Do assignments. Helps you appreciate the beauty of react. Helps you become strong.
+
+Attend live classes
+Rewatch the recordings
+take notes
+Do assignments
+practice
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
