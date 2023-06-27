@@ -6,11 +6,12 @@ import {
   CORS_ERROR_MESSAGE,
 } from "../Constants";
 import RestaurantCard from "./RestaurantCard";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterRestaurantData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import UserContext from "../utils/UserContext";
 
 const RestaurantList = ({ restaurants, user }) => {
   console.log("res", restaurants);
@@ -27,13 +28,14 @@ const RestaurantList = ({ restaurants, user }) => {
   );
 };
 
-const Body = ({ user }) => {
+const Body = ({ user: propsUser }) => {
   // let searchTxt = "KFC"; - Creating a local variable in JS
   const [allRestaurants, setAllRestaurants] = useState([]); //Creating a local state variable in react
   const [filteredRestaurants, setFilteredRestaurants] = useState([]); //Creating a local state variable in react
   const [searchTxt, setSearchTxt] = useState("");
-  const [user1, setUser1] = useState(user);
+  const [user1, setUser1] = useState(propsUser);
   const [errorMessage, setErrorMessage] = useState("");
+  const { user, setUser } = useContext(UserContext);
 
   useEffect(() => {
     setTimeout(() => {
@@ -127,6 +129,17 @@ const Body = ({ user }) => {
         >
           Search
         </button>
+        <input
+          value={user.name}
+          onChange={(e) => {
+            console.log(e.value);
+            console.log(e.target.value);
+            setUser({
+              email: "ganesh@reactdev.com",
+              name: e.target.value,
+            });
+          }}
+        />
       </div>
       {filteredRestaurants.length > 0 ? (
         <RestaurantList restaurants={filteredRestaurants} user={user1} />
