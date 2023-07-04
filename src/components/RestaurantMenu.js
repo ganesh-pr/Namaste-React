@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import { IMG_CDN_URL, RESTAURANT_MENU_API } from "../Constants";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const RestaurantMenu = () => {
   // How to read a dynamic URL params
@@ -11,6 +13,16 @@ const RestaurantMenu = () => {
   console.log(params);
 
   const restaurantDetail = useRestaurant(id);
+  const dispatch = useDispatch();
+  console.log(dispatch);
+  console.log(typeof dispatch);
+  // const handleAddItem = () => {
+  //   dispatch(addItem("Grapes"));
+  // };
+
+  const addFoodItem = (item) => {
+    dispatch(addItem(item));
+  };
 
   if (!restaurantDetail) {
     return <Shimmer />;
@@ -39,17 +51,33 @@ const RestaurantMenu = () => {
           {restaurantDetail?.restaurantInfo?.costForTwo / 100} INR
         </h2>
       </div>
+      <div>
+        {/* <button
+          className="m-2 p-2 bg-green-300"
+          onClick={() => handleAddItem()}
+        >
+          Add Item
+        </button> */}
+      </div>
       <div className="mx-auto mt-10">
         <h1 className="text-xl font-bold">Menu</h1>
         <ul className="list-disc">
           {restaurantDetail?.restaurantMenuItems &&
-            Object.values(restaurantDetail?.restaurantMenuItems).map(
-              ({
-                card: {
-                  info: { id, name },
-                },
-              }) => (console.log("item", id), (<li key={id}>{name}</li>))
-            )}
+            Object.values(restaurantDetail?.restaurantMenuItems).map((item) => {
+              const itemInfo = item.card.info;
+              return (
+                <>
+                  <li key={itemInfo.id}>{itemInfo.name}</li>
+                  <button
+                    className="p-1 bg-green-50"
+                    onClick={() => addFoodItem(itemInfo)}
+                    key={itemInfo.id + "- button"}
+                  >
+                    AddItem
+                  </button>
+                </>
+              );
+            })}
         </ul>
       </div>
     </div>
