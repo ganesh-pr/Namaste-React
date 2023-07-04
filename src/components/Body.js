@@ -129,7 +129,7 @@ const Body = ({ user: propsUser }) => {
         >
           Search
         </button>
-        <input
+        {/* <input
           value={user.name}
           onChange={(e) => {
             console.log(e.value);
@@ -139,7 +139,7 @@ const Body = ({ user: propsUser }) => {
               name: e.target.value,
             });
           }}
-        />
+        /> */}
       </div>
       {filteredRestaurants.length > 0 ? (
         <RestaurantList restaurants={filteredRestaurants} user={user1} />

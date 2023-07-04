@@ -1418,9 +1418,494 @@ Do assignments. Helps you appreciate the beauty of react. Helps you become stron
 
 Attend live classes
 Rewatch the recordings
-take notes
+make your own notes
 Do assignments
 practice
+Engage in community
+
+L12 - Lets build our store
+What are the two layers in an application - UI layer, data layer
+What do you write inside the code that powers your UI layer - JSX
+What is the data layer - Passing the data from one component to another, data management using state, props, and context.
+
+UI layer and data layer all works in sync. All this is happening over your browser.
+
+Today, we can see more complex ways or more efficient ways of handling data into our application.
+
+Handling data inside our webapp is a very important thing.
+
+If its a small application, it does not matter how we build our data and how we manage our data using state, props.
+
+But if we want to manage a big, production ready, large web application, handling data for it becomes very important and very critical. For that, a lot of companies use a library, which is known as redux.
+
+Why do companies even need Redux? We need Redux to manage our data layer of the application. If we are building a large web application, our web page holds a lot of data. Redux is that place where we can handle data. You use Redux for that.
+
+Why did we use Context? To avoid prop drilling. Suppose we have this whole big application. In this app, we have these different components: Header, one component, another component, footer, carousel with lot of images. So we might need to pass data from one component to another. There is top level component and small components inside it.
+
+Suppose we want to pass the data to smaller components from our root. So we might need to pass data from one component to another component to another component. This is known as prop drilling.
+
+What is Context? Any component can access the context, any component can modify the context.
+
+When our application grows a lot, libraries like redux come into picture.
+
+We can use context for logged in user data, to switch between dark and light themes. Update background color, wish list context, cart context
+
+To manage our data properly, we can also create redux. Instead of creating contexts, we can create a redux store.
+
+History of Redux:
+
+Redux is used for data management. But, there were many issues using Redux. Redux gives us a proper way to manage, handle, modify and read data.
+
+A lot of companies choose to use Redux. Some companies use alternative to Redux.
+
+We will see today what is Redux and what is Redux store.
+
+There are cons of Redux as well:
+
+It has a complex setup. Huge learning curve. It was very tough to learn Redux. If your application is very small, we don't need Redux.
+
+Only use Redux if you have a large scale application which involves a lot of data handling. 
+
+There was an era where companies and developers used Redux so heavily that they did not know React and Redux are two different things. They use to think that actions, stores and reducers are part of Redux. 
+Many developers don't even know the difference between Redux and React.
+
+Till now, in this whole course, we did not cover redux.
+
+Many developers also don't know the difference between a bundler and react. 
+
+To make a whole full-fledged application performant, can only React do that? We need a lot of different libraries and tools. We need bundlers, we need react-router-dom for managing routing. We will use a package for testing, data management. 
+
+If you want to build a large scale application, only using React does not work. We will be offloading data management to Redux store. 
+
+Now, there will be a lot of complexity when we write Redux and it is difficult to understand. So redux has come up with something known as redux toolkit.
+
+Ref: redux.js.org
+
+redux-toolkit is the new way of doing redux. 
+
+What is the difference between redux and redux-toolkit?
+Redux-toolkit is intended to be standard way of writing Redux logic. 
+
+What is good about Redux is they understood that if they continue to use the older patterns of using redux, they are not going to last for long. Developers don't want to write all that shitty code.
+
+It is similar to react. What would you use?
+
+Class components or functional components: What would you use: class components or functional components?
+
+If react still uses class components, there won't be huge increase in the people using React. People love React because React constantly improved the developer experience.
+
+Now, it is a very standard way to use Redux toolkit. Use Redux-toolkit for all the new applications you use. Redux is a complex, old way.
+
+Three main concerns of Redux:
+1. Configuring Redux store is too complicated
+2. Need to add a lot of packages to do anything useful
+3. Redux requires too much boilerplate code.
+
+ We will be using redux-toolkit.
+
+Suppose we have a web application. It has a lot of components.
+
+Today, we are going to build the whole checkout flow. It involves a lot of data.
+
+Have we implemented a dummy login page? Click and open the webpage.
+
+We click on Mushroom 65, I go to my cart, and proceed to payment, etc.
+
+How will my cart page look? Cart page will have list of items right.
+
+So, if we look at swiggy.com > Restaurant list > Restaurant > Select Curry 
+
+Observe that it added an item to the cart. 
+
+If I click on another item, it will add two items to the cart. If you click on cart, you will see where you have added more items to the cart.
+
+So our menu page will have different items: parotha, poha, etc.
+
+Each menu item will have a plus button
+
+How would we build this? 
+
+What we are going to cover is very important.
+
+Clicking on + button would update the cart with more items.
+
+What are hooks at the end of the day? Those are functions. What is redux store at the end of the day?
+
+At the end of the day, redux store is a big all object. Big object with different sections. Different sections are small pieces.
+
+Important: Just like context, what components can access redux store? All components can access redux store.
+
+When you create a state variable, it is restricted to only that component. 
+
+What is the scope of this state variable? It is restricted to that only component. When you have props, props can be passed down. Props is a way to get data into the component from its parent.
+
+Store is a central thing. Its not tied to any component and context also is not tied to any component. Context is a separate entity. Similar to that, redux store is also a separate entity out of the application.
+
+Your webapp is different, your store is different.
+
+State and props follow the parent child hierarchy.  They are tied to the components.
+
+Context is a central place. They are like a big global object. We can access it anywhere in our app.  Similar to that, we have Redux store. Redux store also we can access it from any place irrespective of where our component stays.
+
+
+Can we have multiple contexts? Yes
+
+
+Can we have multiple stores? No. In Redux, we will have a single store for holding everything. Suppose we want to store the data about logged in user, we will store inside store, suppose we want to hold the data about cart items, we will put inside store, suppose if we want the theme information to be hold, we will put it inside store. Suppose if we need to put some authentication information, we will put that in store. It is basically a whole large big store with a lot of data.
+
+It is not a poor practice to put all data inside one store. This is because we will create logical separation into our store.
+
+We will create slices of our store. Each store will have different slices of the store.
+
+We can have a user slice, cart slice, theme slice. A slice is a small portion of your store. You have a big, full fledged store that can be broken down into smaller slices. 
+
+Now, our components cannot directly modify the store. Suppose if I click on the plus button, I cannot directly modify the cart. 
+
+First, I will have to dispatch an action. Lets give the action name as add item.
+
+When we learn redux, we have a lot of jargons. One is the store. One is a slice. One is an action. We always dispatch an action. The action, in this case is known as add an item.
+
+The action will call a function, a normal JS function and this function will modify our cart so we cannot directly modify the store.
+
+When we click on the plus button, we will dispatch an action, this action will call a function and this function will modify our cart. We cannot directly modify our cart.
+
+Why can't we directly modify a store? When there is a large application, you don't want random components to randomly modify our store. We need to keep a track of everything. 
+
+Redux is a full fledged better way of handling data.
+
+Data is the source of truth of your application. We don't want any component to directly modify. We want a process associated with it. Its like breaking down your app into smaller pieces. Its a good way.
+
+Why do we have microservice architecture? Why can't we write everything in one place? It is separation of concerns. It is also modular. Every piece has its own responsibility.
+
+Why big applications have this kind of data flow. You will get an answer by the end of this session. Why do we have this? Why not directly modify the store?
+
+If we directly modify the store, it will be all complex.There is a need to be a central place. It would be a mess because random things modify random components. Because redux takes care of a lot of things. 
+
+**************** IMPORTANT ********************
+When we click on plus button, we dispatch an action, which calls a reducer function, which updates the slice of our redux store.
+**************** IMPORTANT ********************
+
+If you understand the above statement, you understand the redux architecture.
+
+When we are saying dispatch, you should know what dispatch an action is doing.
+
+When I say I am calling a reducer function, I am talking about this function which modifies our slice of store. If you understand, you understand the redux store.
+
+Terminology: dispatch action reducer function slice redux store
+
+You have so far seen how to write the store. But then, how to read the store. How to display the number 2 when a new item is checked.
+
+**************** IMPORTANT ********************
+
+If you want to read the cart, you need to call call the selector, the selector will give you the information that will update the cart. Selector selects the slice of our store.
+
+This diagram should stick to your head.
+
+When we click on + button, we dispatch an action, which calls the reducer function, which updates the slice of redux store. To read the data, we use a selector and this will update my cart.
+
+What is a selector at the end of the day? Selector is a hook and hook is a function at the end of the day.
+
+When we use a selector, we use something as subscribing to the store. This means that the cart component will subscribe to the store. It is reading something from the store. It is synced with the store. Whenever my store will modify, my cart will automatically modify. That's why we say cart component is subscribed to my store. Which means that whenever my store will modify, my cart will automatically modify in my UI. 
+
+How does a component subscribe to a store? using selector. Its a hook known as useSelector.
+
+Many people feel that actions are a part of react, reducer is part of react, selector is a part of react.
+
+We need extra library: Redux-toolkit library
+
+Q: Why two libraries?
+
+What is the job of Redux store? Redux store is to create, maintain, and manage the store. Core library of redux.
+
+The other library is the bridge between react and redux. 
+
+ConfigureStore is the job of the core library @reduxjs/toolkit. The store will contain slices. It is an object, it will contain slices.
+
+const store = configureStore({})
+
+The store is now created. Store is different and app is different.
+
+How do I provide my store to the application? 
+
+Who uses Redux store? Whole application or just our components? Both, our choice.
+
+What is the root component - AppLayOut. I will provide the store to my whole app. We will import a provider component.
+
+I want to provide my redux store for the react application. Which library will provide this. React-redux will give me this provider. 
+
+How do I use this provider? 
+
+import {Provider} from 'react-redux'
+
+Provider is a component. Can be wrapped on top of all components.
+
+<Provider store={store}>
+At the end of the day, store is like a props. It is like passing our store into our react application.
+
+What is the api to create a store? configureStore.
+
+Where did it come from? rtk -> redux-toolkit
+
+We need to provide this store to our application. Where did the provider come from? react-redux
+
+Now we are ready for actions, subscribers, reducers.
+
+The name store is very important for the prop name because redux would be destructuring it some where. The store value can be any name.
+
+<Provider store={store}>
+
+Lets fill our store with something. Our store should contain slices. We can create all our slices in the same or different files.
+
+creating slices is the core job of redux toolkit.
+
+const cartSlice = createSlice({
+    name: 'cart',
+    initialState: {
+        items: []
+    }
+})
+
+name of slice is cart. 
+
+Initial state for the cart is the initial value of the cart.
+
+Cart is an object and has items empty. For count, I can do items.length
+
+I will modify the cart slice using a reducer function.
+
+When are the reducers called? On dispatch of an action.
+
+What can be actions inside my cart? This is where we say what actions will call the reducer function. Mapping between action and reducer function.
+
+reducers: {
+    addItems: (state, action) => {
+
+    }
+}
+
+addItems is the action. () => { ... } is the reducer function.
+
+The reducer function takes in the state and action payload. state is the initial state.  action is the data which is coming in.
+
+If I need to modify, I need to update the initial state. I can do it by pushing action payload to state.
+
+
+reducers: {
+    addItems: (state, action) => {
+            state.items.push(action.payload)
+    }
+}
+
+When we dispatch an action, then we will pass that data which will be there in action.payload.
+
+The state is always the previous state. In this case, it is initial state.  When we change the data, the state will hold the current value of the state.
+
+ can we have more actions in reducers? Yes
+
+ Please remember that reducer function does not return anything. It takes a state and directly modifies it.
+
+For clear cart, I don't need action payload.
+
+For creating a slice inside a store, we will need createSlice and the object param will have a name, initial state, and we will have reducers. Each reducer will have an action and a reducer function. The reducer function will modify the state. Whatever logic I want to write, we can write in reducer function.
+
+action -> addItems and 
+reducer function : () => {}
+
+We will now export something from it so that the functions are available to components. I will export my actions and reducers from here. Redux toolkit says this is how we will export it up. 
+
+*********IMPORTANT********************************                                                                  
+It is reducer here and not reducers. It will combine all reducers and export it as one reducer.
+
+export default cartSlice.reducer
+
+export {addItem, removeItem, clearCart} = cartSlice.actions
+
+It is actions and not action
+
+*********IMPORTANT********************************                                                                  
+
+react-router-dom is so intuitive. useParams was easy to use. This is unlike redux where it is difficult to read
+
+The cartSlice will return an object with actions and reducer.
+
+cartSlice = {
+    actions: {addItem, removeItem, clearCart}
+    reducer: reducers
+}
+
+Why to export actions by name? Because there are a lot of names.
+
+we will be importing cartSlice in store and add all reducers to the reducer of the store. The key is the name of the slice and the slice object
+
+const store = configureStore({
+    reducer: {
+        cart: cartSlice,
+    }
+})
+
+export default store;
+
+Remember this is again a reducer. 
+
+Once we configure everything, it is simple.
+
+Revision:
+1. Created store. API name: configureStore. Imported from rtk
+2. Provide my store to app. API name: Provider component. Imported from react-redux. key name is store
+3. Create a slice. API name: createSlice. Imported from rtk
+4. createSlice needs name, initialState, reducers
+5. reducers contain action and reducer functions. reducer function takes state and action as arguments.
+6. How to modify state. Do not return anything. We directly modify state.
+7. How to export my reducer. export default cartSlice.reducer
+8. How to export my actions. cartSLice.actions
+9. Put that slice into store. reducer: {cart: cartSlice}
+
+We will be making a lot of slices and each slice will export its reducer. Suppose we have a userSlice, suppose we have a profileSlice. Each slice will export its reducer. All these reducers will come into the reducer object.
+
+How do I subscribe to the store? useSelector hook is a named import from react-redux
+
+useSelector(() => store.cart.items)
+
+Lets dispatch an action.
+
+10. Write a function handleAddItem on button click
+11. handleAddItem should dispatch an action with payload. The action should pass in some value. In this case, it is Grapes.
+        What is the action to dispatch? addItem
+        What is the item to add? Grapes
+
+import {addItem} from '.../utils/cartSlice'
+const dispatch = useDispatch()
+dispatch(addItem("Grapes"))             // dispatch action and pass the payload.
+
+dispatch is the return of another important useDispatch hook
+addItem is the action returned from the slice redux actions. It is exported from the slice file as a named export
+Grapes is the action payload
+
+Summary: 
+store and slice imported from rtk
+useSelector, useDispatch and Provider are related to components, so they will be imported from react-redux.
+
+Clicking on button is configured to handleAddItem function. The function will dispatch an action. The dispatch function is coming from the useDispatch hook. The dispatch function takes in as param the reducer action, which is addItem. We will import addItem from slice actions.
+
+When we click on the add button, action is getting dispatched, which is calling the reducer function, which is updating the slice of our store.
+        And this cart is subscribed to our store using useSelector. This is the power of redux toolkit.
+
+onclick -> handleAddItem -> dispatch action -> action is addItem -> addItem is passed in Grapes. 
+
+addItem -> reducers function -> reducer function updates the slice of our store. Grapes are coming in as action.payload. Redux says that it will give you an action and we need to use action.payload.
+
+Lets dive deeper.
+
+We don't create slices everyday. Everyday job is to dispatch an action, subscribe to the store. reducer and reducers those small things are confusing. Documentation is average.
+
+With all this knowledge, documentation is a piece of cake.
+
+Takeaway: Redux toolkit is vast, a very big library. This is only the important basic stuff.
+
+Lets add buttons to these and dipatch each item object.
+
+Remove Bananas and Grapes and have the cart empty. 
+
+Note: useSelector takes a callback function. Passes store as the callback argument.
+
+This is how fast you need to develop React applications. This is how you have to do machine coding.
+
+*********** VERY IMPORTANT **************
+ 
+What is useSelector used for? To subscribe to the store. This is the place you will tell what you are subscribing to.
+
+If we write const cartItems = useSelector(store => store.cart.items) it will subscribe to only the items array.
+
+This is where people make most mistakes. We can also do useSelector(store => store). This is perfectly valid. We can make a major performance improvement.
+
+Everytime my store changes, my cart will change. It will re-render the component. Store will have so many slices, so much data. Do we want to re-render the component everytime a store changes. This will be a major performance improvement.
+
+so we need to use cartItems = useSelector(store => store.cart.items) so we are subscribing to only a portion of the store.
+
+*********** VERY IMPORTANT **************
+
+Now lets build an image in the cart page. Lets do the FoodItem component for one item and then do a map.
+
+If you code strategically, you would have to go less back and forth. First I will make one card work, then I will make n cards work.
+
+Now lets clear the cart.
+
+Once you setup your store and created slices, it is very easy to add stuff up, it is very easy to dispatch actions.
+
+This will be 90% of the things you will be seeing in rtk
+
+Go to rtk documentation and try to read. Everything will make sense to you.
+
+Takeaway: 
+1. redux-toolkit.js.org > Introduction > Getting Started
+2. Redux dev tools is a super powerful extension. It will be a better developer experience
+3. Thunk, middleware and RTK query are complex concepts. Read later
+
+Redux dev tools:
+How is data getting dispatched, how data is getting updated in the state, all that things we can see inside redux dev tools.
+
+If we refresh the page, state tab has the cart slice created with no data
+
+The left pane shows INIT and then it shows the dispatch of add item.
+
+As your application grows, there will be so many slices, so many actions, dispatches randomly happening.
+
+Lets say we added stuff, we cleared it and added new stuff.
+
+Amazing thing is this extension was tracking each and everything in it.
+
+We can also play what we added, cleared and added. I was not even there on the cart page when I added stuff but react was tracking every small thing.
+
+We can also skip an action. Use the diff to identify an addition. Observe that when we skip an additem, we see that the cart directly addes the next item.
+
+We can use redux dev tools differently altogether. When application becomes large, it will be very helpful to debug all these small things.
+
+it wrote test cases for your reducer. You can download and upload also.
+
+Focus on one big quality project. That will make you proud. This is better than small 10-20 projects.
+
+PLEASE DO YOUR HOMEWORK
+
+Be Exceptional. Write industry level code of react.
+
+redux store: slice, dispatch, action, reducer, useSelector, subscribe to a store, provider, redux dev tools
+
+Be active in the community. The one who contribute to the community will become a lot better.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
