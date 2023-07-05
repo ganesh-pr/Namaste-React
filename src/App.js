@@ -36,7 +36,7 @@ const AppLayOut = () => {
   //const About = lazy(() => import("./components/About"));
 
   const [user, setUser] = useState({
-    email: "ganesh@reactdev.com",
+    email: "grdodda@gmail.com",
     name: "Ganesh",
   });
 
@@ -69,7 +69,7 @@ const appRouter = createBrowserRouter([
         element: (
           <Body
             user={{
-              name: "Namaste React",
+              name: "Ganesh",
               email: "ganesh@reactdev.com",
             }}
           />

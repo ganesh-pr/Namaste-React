@@ -1873,14 +1873,172 @@ redux store: slice, dispatch, action, reducer, useSelector, subscribe to a store
 Be active in the community. The one who contribute to the community will become a lot better.
 
 
+14 - Machine Coding Round - Youtube
+
+I dont want you to be only get better in React. I want you to clear React interviews as well. I can teach you about topics in React that will help you in your interviews. 
+
+I want you to become holistic developer.
+
+**********VERY IMPORTANT****************
+Whenever you give React interviews, the first round will be a machine coding interview round. I will tell you important tips that will enable you to crack machine coding interview rounds.
+**********VERY IMPORTANT****************
+
+Some companies take this machine coding interview round in Pure Vanilla JS, HTML, and CSS
+
+Some companies take machine coding round in your tech stack. To build an app using react js. Share your screen and build your project.
+
+Some companies use online platforms HackerRank or codesandbox where you create your react app
+
+But in all cases, the round focuses on building a web application using react.
+
+What were you asked to build? To do list, fetch data from the api, forms, quiz app, nested filter, carousels, hooks,
+api call, data, forms, searching, sorting, infinite scroll, higher order components, ecommerce website, counter app, debouncing, tic tac toe, facebook, comment engine, swiggy like website, trello app, chatbot, ecommerce website
+
+In your machine coding round, you can be asked to build any kind of app.
+
+What is the toughest part of the interview?
+Live coding: Can be. YYou are coding infront of the interviewer.
+The most toughest part is managing your time. Time is toughest to crack.
+
+You are given 1-2 hours and you are supposed to build the whole app in 1-2 hours and the interviewer is watching you.
+It feels like pressure. 
+
+How to avoid that pressure? It is by practice. 
+
+Before the interview, you can do practice.
+
+In the interview, planning will help. I will solve a machine coding round of problem just like a candidate. I would have solved in an interview. I will give all tips on how to do proper planning and how to do proper execution of that planning. GET READY FOR IT!
+
+I am going to build a big app. Let us build our major project. Gave more than 50 machine coding round of interviews and I have never, ever failed in atleast one coding interview. I have failed in theory interviews, JS coding interviews, system design interviews but never failed in machine coding interviews.
+
+It is about building something and we are react developers. If you are confident and practiced it right, you will never fail in machine coding round of interviews. You just have to be good at planning and execution. I want my students to be as good as the candidates for machine coding round of interviews.
+
+Today, we are going to build Youtube in the next two hours. How would I plan everything? How would I execute it? How do I run everything?  I will teach you today the blueprint of machine coding round of interview so that you never fail in it. We will build youtube as much as I can today and we will continue to build complex stuff of youtube in the next session.
+
+You would see that what you have learned in all 13 chapters, everything will be used today. Give me a thumbs up!
+
+I want you all to be 100% focused. This will help through out your career in every machine coding round of interview that you take.
+
+The most toughest part of machine coding round of interview is managing your time.
+
+First thing first: don't open vscode. They take out the laptop and don't ask the questions.
+
+First thing to do is requirements clarification. First of all, you need to discuss in the interview, what features you are going to develop. Lets go to youtube.com to take the reference.
+
+When you load youtube, you would see the home page, side bar, list of tag buttons on the top. When I click on a video, it opens in a new page. There is a shimmer. If we click on hamburger, it opens and closes the sidebar.
+
+Discuss with your interviewer, what features you will build, whether you can build a search or not, comments or not, comments section is complex
+
+First step of requirements clarification is the features that you are going to build.
+Then you will discuss the tech stack: When we are building a web application, you need to discuss the tech stack for your react application.
+Whether you are going to use Tailwind or not
+Whether you are going to use TypeScript or JavaScript
+Whether you are going to use Redux or Context APIs or some other data layer
+
+What are the two layers: UI layer and data layer. 
+
+UI layer - want to use tailwind css for all my stylesheets
+Data layer - want to use Redux for all my data management
+
+When we are making a small app like ToDo list or counter app, context makes sense. It does not have any complex data flows or something. 
+
+Discuss this with your interviewer, so he understands we are thinking like a senior engineer.
+Lets use Redux for our application. Also discuss why we are choosing Redux.
+For styling, I will use Tailwind. We are using Tailwind because its a modern framework, makes react app developer faster. What are the pros of Tailwind? Fast, gives a lot of reusable classes. It does not load up our CSS. It keeps uniformity in our app, it is customizable, extensible
+
+Suppose you say you don't want to use Tailwind. You want to use SaSS, SCSS or Material UI. You should have your justification. You should have justification why you are using every small damn thing. MAKES YOU STAND OUT!
+This shows you are a thinker, problem solver, that you are just not thinking about building something, but thinking about building a scalable application.
+
+What else should we use? If your app consists of forms I will use formik or other library for doing that.
+
+I will be using react-router-dom for routing. You can talk about what bundler you are using.
+
+The interviewer will get impressed. 
+
+What testing library we will be using? Jest and react testing library for testing
+
+You can talk about storage.
+
+How much time we have to spend on this? 5 minutes to discuss.
+
+First thing should be build home page, it will get some videos, hamburger menu which opens and closes, there will be a search bar. We click on a video, it opens up a video page. I will use Redux for managing data. I will use Tailwind for styling. I will be use bundler like parcel and for testing, jest and testing library.
+
+What if the interviewer says that? You don't have to use that. It never happens like that. You have to give proper justification. It is not the case that you say, I want to use Redux and your interviewer says use context api. It is your choice as an engineer to choose. 
+
+Most times, interviewers are not rigid.
+
+Can we do google search? Most cases, interviewers will allow google search. However, if you practice, you don't need google and you will be saving a lot of time. It is your time that is spent on google search. 
+
+5 minutes discussing these.
+
+We are running out of time.
+
+Planning:
+
+After you discuss the features, tech stack. The next five minutes you will have to come up with planning things up. Don't start writing code. You have to do planning.
+
+Can you tell me what do you mean by planning? Pseudo code or low level design. How you will structuring you components. How will you use your UI and data layer together.
+
+This is my whole app. You also have seen the youtube app, the interviewer would also have seen the youtube app. Why are we discussing the same thing with interviewer. Because you will be in the same page. We can build Youtube in thousands of different ways. You will discuss your approach and you will be on the same page. Many people don't do this. That is why you fail because interviewer is expecting something else, you are building something else.
+
+What to discuss in planning?
+
+Just as we see in youtube, we will have a header. THe header will have a hamburger icon to open the side panel. What comes inside of side panel? Links like home, shorts, subscription, library, etc.
+
+Hamburger will open and collapse.
+
+On the header, we also have youtube logo, we have a user icon. 
+
+We will have our main body. It contains videos. We will have buttons over here on the top.                                                          
+
+We will also have videos, on click of button, it will open a new video in a new page, it will take me to a new page which opens in /watch
+
+In /watch, it will open  a watch page, same header, a video, suggestions and comments section. This is good enough. Lets try to build atleast this much.
+
+There can be chat, subscribe, like button. 
+
+When we take time to discuss this, how much time will you take to discuss this: 5 minutes.
+
+The more planning you will do, the better code you will write. You can also go one level ahead and discuss how will you differentiate your components.
+
+I will make a heading component. This will be my head component. Sidebar component. Body component will have button list component. VideoContainer component. In VideoContainer component, we have videocard component.
+
+In watch page, we have the same head component, and the watch video component
+
+Planning is really important. Now, we will be executing things up.
+
+Revision: 
+
+In your machine coding round of interview, you have to develop your app in limited time.
+
+First of all, clarify your requirements. Features what you are going to develop.
+
+In tech stack, bundler, UI layer, data layer, Redux, Context APIs, Tailwind, Material UI, Typescript, Javascript, Testing framework, Enzyme, React testing library.
+
+If I tell the interviewer about all these, will I be expected to code for all these? No, that is not the case. If you say react testing library, you might want to use it. You might skip it. It is always good to discuss with your interviewer.
+
+You can say you will use react-router-dom for the /watch page because it is widely used. 
+
+Structure and planning: If you clearly come up with the UI design, you are figuring out in your head, what you will be writing code for. If you do proper planning, you will write better code.  
+
+When you don't have a structure in your mind, you will create a mess. You will put your components inside something else. You will have to breakdown randomly. Container inside Body and Body inside head. It will be a lot of restructuring and will create a lot of mess.
+
+When I write code, you will help. Now it is just using that knowledge today.
+
+Now I can start from scratch and setup bundler, parcel. You can discuss but tell your interviewer, I am using a create react app. When we are building a large youtube app and we need more customization, we can configure and build our own app from scratch. Setting up our own bundler, Setting up parcel, babel, tooling that we need.
+
+Lets build our create react app
+
+npx create-react-app appname
+
+You see its installing. We manually created our own index.html, index.js. We installed node, we installed npm, we installed parcel, so many things. Many many react developers don't know what is happening.
 
 
 
 
 
 
-
-
+ 
 
 
 
