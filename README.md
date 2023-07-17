@@ -2035,6 +2035,195 @@ You see its installing. We manually created our own index.html, index.js. We ins
 
 
 
+You have all your gitignore setup, package.json setup
+
+The server is up in localhost:3000
+
+We took 3 hours to build this up. The knowledge that you have is extremely important. We know this app is using bundler, parcel, React. They don't know the beauty of bundler. They don't know the beauty of parcel. They don't know the beauty of React. They don't know why the React app is so fast.
+
+Lets take a deep dive into create-react-app
+
+We don't need parcel. We already have webpack setup with this.
+
+It has already created index.js, it has already created app.js for us. It already has testing library for you. Remember we installed this jest-dom. It was such a pain. Now, create-react-app is taking away all this pain. But taking the pain will help you appreciate the beauty of create-react-app
+
+HW: Why reportWebVitals is used for?
+
+It is setting up testing for you automatically. Everything is done by create-react-app. We just have to focus on create-react-app
+
+HW: What is React.StrictMode?
+
+Strict mode is coming from React library.
+
+App.js:
+Remove the code from App.js and remove the related imports. 
+ Lets add a header to ensure everythign is working.
+
+Setup Tailwind.
+    Add Tailwind as a devdependency. 
+        npm i -D tailwindcss
+
+You won't need postcss here as create-react-app takes care of that.  
+
+Setup tailwind config 
+    npx tailwindcss init
+    update content to track all js and html files
+    './src/**/*.js'
+    Single type .js
+    More types {js, html}
+    We can also write just js as we don't have any html files.
+                                                                                        Update app.css
+    Remove all the existing styles
+    I will need to install three tailwind attributes
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+Import app.css and use a tailwind style in div.
+  import './app.css';
+
+Revise the structure:
+
+        /**
+            * Header
+            * Body
+            *  Sidebar
+            *   MenuItems
+            *  Main Container
+            *    ButtonList
+            *    VideoContainer
+            *        VideoCard
+        */
+
+Create components folder
+
+Using rafce, Create components for Head, Body, Sidebar, MainContainer, Buttonlist, VideoContainer, VideoCard
+
+For Head, youtube has left (logo and hamburger), middle(search bar) and right sections(user info).
+
+We can use grid so we can divide the sections within 12 cols
+top div class="grid grid-flow-col"
+
+inner divs class="col-span-2" to 12
+
+To center the search input, text-align: center
+
+During real interview, don't spend time on making things fancy, focus on functionality
+
+For building sidebar, since sidebar can be collapsed and expanded at many places, lets create the sidebar collapse action in a global space i.e. redux store.
+
+Lets create AppSlice because it will contain app level data.
+
+Checkpoint: Check whether store is working correctly or not. Check it using redux dev tools.
+
+Explain to the interviewer about useDispatch and the redux flow.
+
+Do I need to pass anything inside toggleMenu as arguments. No, because toggleMenu does not take payload.
+
+To vertically center flex items, use align-items: center on the flex div
+To vertically center non-flex items, use align-self: center on the parent div
+
+Early return when sidebar is closed.
+
+Your interviewer will be impressed by the redux implementation because you are using a redux store over here. Explain what is happening here. 
+
+ We have focused a lot of time in our planning. If we do this, interviewer will follow what you are writing.
+
+ If you have observed, the refactor was almost zero times. This is because of the practice.
+
+ ****************************** VERY IMPORTANT****************
+ The more time you spend on planning, the better your coding will be.
+****************************** VERY IMPORTANT*****************
+
+TODO: Make the button list scrollable.
+
+For VideoContainer, you need to ask a question to the interviewer on how you will get the data for your videos: API or hardcoded.
+
+Lets code with Youtube API. We won't get CORS this time because we will do it in a legit youtube api way. Youtube gives free apis to use. For a limit.
+
+https://developers.google.com/youtube/v3/docs/videos/list
+
+Lets get the most popular videos
+
+From the api, you will need your own api key
+
+Search: Youtube api key auth
+
+https://developers.google.com/youtube/registering_an_application
+
+A few are saying to use axios instead of fetch. I have used fetch perfectly in production. Why another library? Its of no use unless it provides for any higher level functions.
+
+There are no performance issues with fetch.
+
+axios is a good library but here we won't need it
+
+Enable the API in API console, generate api key and mark the origin.
+https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps
+
+Lets check if the api is returning the videos.
+
+
+***************REMEMBER*************
+Takeaway: Don't start writing with map. Make it work for one and then scale it.
+
+Add a key when using the map function.
+
+Lets build watch page
+
+    Create routing
+        Install react-router-dom
+        In App.js, createBrowserRouter with array of paths. Each path is an object of
+        path, element and children
+
+        If my route changes, what should change? Should my header or sidebar change? No, only the body changes.
+
+        So, provide routerprovider in place of body.
+
+        Wherever I give my RouterProvider, my app will render over there.
+
+        RouterProvider will be replaced by the element node, in this case, it is Body
+
+        Outlet will be replaced by children, in this case it is either MainContainer or WatchPage
+
+Checkpoint: Check whether the watch page is loading.
+
+Update Home to navigate to local
+Close the sidebar by dispatching action from watchpage
+
+For watch page, useParams won't work because useParams work for / and not ?
+
+HW: URLSearchParams research more.
+
+HW: Use Comments API to build comments.
+
+HW: Build Likes, Subscribe and Share
+
+If you practice it, you can build this in less than one hour.
+
+We will build this youtube in an amazing way.
+
+Teaser for next session. Lets build a search bar.
+
+Many interviews ask to build a search bar
+
+Nested comments is also asked a lot.
+
+Build your own youtube by giving a link ganeshdodda.in/youtube or ganeshdodda.youtube.in
+
+Building the page is very easy. Rendering the video components, fetchin an api is very easy.
+
+Behind the scenes, we build a redux store, created a slice, installed react-router-dom, we are using tailwind. We have build the collapsible menu, we will make our search work. We will make our nested comments work. Lets bring in lazy loading. As the code is growing, we will see how to develop an app. Add Shimmer into your project. I have written shimmer, lazy loading, suspense, fallback.
+
+People pay you a lot to develop these applications.
+
+By taking others questions, by solving I have become better. By practising I have become better.
+
+Tips: 
+    Build your own app but record yourself when you do that and you will have to explain it.
+    Have a timer for two hours running with you.
+    Do 5 mins for Requirement clarificaiton and 5 mins for planning
+    Speaking while you code is a great habit
+    Do proper planning, do proper practice and you will never fail
 
 
 
