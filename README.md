@@ -2221,9 +2221,62 @@ By taking others questions, by solving I have become better. By practising I hav
 Tips: 
     Build your own app but record yourself when you do that and you will have to explain it.
     Have a timer for two hours running with you.
-    Do 5 mins for Requirement clarificaiton and 5 mins for planning
+    Do 5 mins for Requirement clarification and 5 mins for planning
     Speaking while you code is a great habit
     Do proper planning, do proper practice and you will never fail
+
+L13_TimeForTheTest
+
+How to write test cases using Jest and React Testing Library. Before, people use to use something known as enzyme.
+
+ Still there are lot of companies who are still working on enzyme but we are going to study react testing library. This is a new way and industry standard in today's world. I have worked with certain testing libraries but this is by far, the best one right now.
+
+testing-library.com
+
+I have worked on many testing libraries but this is by far, the best one right now.
+
+In my understanding, this is what I will be teaching you today.
+
+It is built on top of Jest, it uses Jest behind the scenes. There would already be so many people who write tests in enzyme. So, if you are using enzyme, ask your project to migrate to react testing library. Please migrate to react testing library.
+
+Today, you will have to take a lot of notes because we are going to learn how to setup a testing framework into our app. 
+
+Did we use create-react-app? No, we did not use because create-react-app abstracts a lot of things from you. 
+
+When teachers teach react using create-react-app, they don't get into small things. People do not realize there is a webpack which is working behind the scenes, there is a bundler, there is parcel which is there. We integrated it so we got to know the superpowers of Parcel. We integrated Babel so we got to know Babel. We integrated browserslist, the make our app is compatible with different browsers.
+
+We created our own create-react-app. One piece left is setting up testing inside create-react-app into our app. We have not done testing inside our app.
+
+Let me tell you, setting up testing is very complex. When we do npx create-react-app demoapp, then automagically that create-react-app will create a react app for you and you don't understand what is happening behind the scenes. How can you build a create-react-app
+
+I want to teach things that dive deep and went into core of things. What is used and when to use it. I can also create unit tests on what happens when we load a page or click a button or load a component. But I want to spend time on setting up test cases. When we setup test cases, we will realize that there are so many libraries that are required to run our test cases. There are so many things that we will get stuck into in today's lesson.
+
+There are so many new things you will learn in today's session. Keep your notebook and pen ready. This is again going to be a knowledge heavy session for you all.
+
+I will be setting up testing right from scratch in our app. Don't worry if you have never done testing in your life. First of all, we will set up our project to run test cases and we will write test cases to see how it will work. 
+
+Some people are asking will you cover cypress, selenium, etc. We are covering react testing library. Let me tell you a little things.
+
+First of all, why do we need test cases. Lets start with the basics. When we develop our app, we check our code. Does our code work as expected or not.
+
+Maintainability, quality of the product, everything is fine but I will tell you why do we actually need test cases. Generally, when we build a large scale application, is it just one developer working on that application
+
+There are so many developers working on the application. And the application does not have like 1, 2, 5 components, it has hundreds of components, hundreds of dependencies, this that and so many things happening inside that. What happens is these components are integrated with each other. This restaurantlist is a new component, this restaurant card is a new component in itself. If I search for cafe, lets say sagar or something. A change in input component is updating a lot of components that are rendered. IT changes a lot of things inside it and all components are interrelated with each other. First of all, we just listed down these components. We just displayed the components into our page and then we added the search functionality on top of it.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
