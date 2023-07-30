@@ -19,8 +19,8 @@ const RestaurantList = ({ restaurants, user }) => {
     <div className="flex flex-wrap h-auto m-auto">
       {restaurants.map((res) => {
         return (
-          <Link to={"restaurant/" + res?.data.id} key={res?.data.id}>
-            <RestaurantCard {...res?.data} user={user} />
+          <Link to={"restaurant/" + res?.info?.id} key={res?.info?.id}>
+            <RestaurantCard {...res?.info} user={user} />
           </Link>
         );
       })}
@@ -58,10 +58,16 @@ const Body = ({ user: propsUser }) => {
       let list = await data.json();
       console.log(list);
       if (list.statusCode !== RESTAURANT_LIST_ERROR_CODE) {
-        list?.data?.cards.forEach((restaurantListCard) => {
-          if (restaurantListCard?.cardType === "seeAllRestaurants") {
-            setAllRestaurants(restaurantListCard.data?.data?.cards);
-            setFilteredRestaurants(restaurantListCard.data?.data?.cards);
+        list?.data?.cards?.forEach((restaurantListCard) => {
+          if (restaurantListCard?.card?.card?.id === "top_brands_for_you") {
+            setAllRestaurants(
+              restaurantListCard?.card?.card?.gridElements.infoWithStyle
+                .restaurants
+            );
+            setFilteredRestaurants(
+              restaurantListCard?.card?.card?.gridElements.infoWithStyle
+                .restaurants
+            );
           }
         });
       } else {
