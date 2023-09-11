@@ -10,12 +10,13 @@ const RestaurantMenu = () => {
   // How to read a dynamic URL params
   const params = useParams();
   const { id } = useParams();
-  console.log(params);
+  //console.log(params);
 
   const restaurantDetail = useRestaurant(id);
   const dispatch = useDispatch();
-  console.log(dispatch);
-  console.log(typeof dispatch);
+  console.log(restaurantDetail);
+  //console.log(dispatch);
+  //console.log(typeof dispatch);
   // const handleAddItem = () => {
   //   dispatch(addItem("Grapes"));
   // };
@@ -61,7 +62,7 @@ const RestaurantMenu = () => {
       </div>
       <div className="mx-auto mt-10">
         <h1 className="text-xl font-bold">Menu</h1>
-        <ul className="list-disc">
+        <ul className="list-disc" data-testid="menu">
           {restaurantDetail?.restaurantMenuItems &&
             Object.values(restaurantDetail?.restaurantMenuItems).map((item) => {
               const itemInfo = item.card.info;
@@ -72,6 +73,7 @@ const RestaurantMenu = () => {
                     className="p-1 bg-green-50"
                     onClick={() => addFoodItem(itemInfo)}
                     key={itemInfo.id + "- button"}
+                    data-testid="add-btn"
                   >
                     AddItem
                   </button>

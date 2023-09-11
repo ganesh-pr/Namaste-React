@@ -2259,9 +2259,704 @@ Some people are asking will you cover cypress, selenium, etc. We are covering re
 
 First of all, why do we need test cases. Lets start with the basics. When we develop our app, we check our code. Does our code work as expected or not.
 
-Maintainability, quality of the product, everything is fine but I will tell you why do we actually need test cases. Generally, when we build a large scale application, is it just one developer working on that application
+Maintainability, quality of the product, everything is fine but I will tell you why do we actually need test cases. 
 
-There are so many developers working on the application. And the application does not have like 1, 2, 5 components, it has hundreds of components, hundreds of dependencies, this that and so many things happening inside that. What happens is these components are integrated with each other. This restaurantlist is a new component, this restaurant card is a new component in itself. If I search for cafe, lets say sagar or something. A change in input component is updating a lot of components that are rendered. IT changes a lot of things inside it and all components are interrelated with each other. First of all, we just listed down these components. We just displayed the components into our page and then we added the search functionality on top of it.
+Generally, when we build a large scale application, is it just one developer working on that application?
+
+There are so many developers working on the application. And the application does not have like 1, 2, 5 components, it has hundreds of components, hundreds of dependencies, this that and so many things happening inside that. What happens is these components are integrated with each other. Search container can be a new component. This restaurantlist is a new component, this restaurant card is a new component in itself. If I search for cafe, lets say sagar or something. A change in input component is updating a lot of components that are rendered. IT changes a lot of things inside it and all components are interrelated with each other. First of all, we just listed down these components. We just displayed the components into our page and then we added the search functionality on top of it.
+
+So I have created the list of restaurants and Suman created the search functionality. The changes done by Suman can break my code and Suman would not even realize that he broke my code. 
+
+Suppose we are going and click on add menu item and we are affecting the cart page also. Somebody would have clicked on the cart page, somebody would have built the cart page, we are clicking add from here from restaurant menu. 
+
+
+****************** FUNDAMENTAL ************************
+What happens is we write test cases to ensure that our code is properly intact. Whatever we are writing passes test cases if the new code we are writing is not breaking the existing code. If we are adding new features, are we breaking the existing ones? Tests is one of the most important factor how we write code.
+
+This is the core fundamental which lot of developers do not understand.
+***************** FUNDAMENTAL *************************
+
+That is why, writing unit tests gives us confidence. It gives us confidence. As and when our app loads, these existing components. Suppose if we are adding one more component into our app, suppose there are thousand components into our app, if you are adding one more component, how sure are you that you are not breaking the other 1000 components, you are not sure right. Testing gives us a lot of confidence that I am not breaking the existing flows. This is why we generally test. Now you can put up it helps in maintainability. Now you know when we see maintainability, how we are maintaining.
+
+That we are adding things up but our code is proper. It is maintainable code. This is the core of it.
+
+These are the jargons in the industry: 
+There is something known as test-driven development. What we mean by test-driven development is we write test cases even before we write our code. Generally, in the industries, companies do not follow test-driven development. Why?
+Is test-driven development bad? TDD is very, very good. When we are doing TDD, we write test case even before we write our code. We always have 100% test coverage. However, when we do TDD, our development process becomes very, very, very slow. But it will ensure a very good quality of code. But development time increases a lot. That is why, companies generally do not focus on TDD. In my whole career, I have never done TDD starting from startups to big companies. No body does that. I used to feel startups do not focus on it because they want to move fast. But even big companies do not focus on it much. Its not that widely popular. TDD needs a different mindset altogether. 
+
+Suppose I want to create a function sum that returns the sum of two numbers. First of all, I will write a test case for it. 
+
+test('check sum of two numbers', () => {
+    expect(sum(2,3).toBe(5));
+})
+
+First, I will write the test case. Then, I will write the sum function which will pass the test case. Lets write all the test cases for negative and blank values. First, I will write the test cases to make it extremely efficient. Then, I will actually write my sum function. That way, we will make sure that my sum function is properly written and that way, we are making sure we are not breaking anything. This is an ideal case. Now, think about we are doing this for every case. 
+
+test('check sum of two numbers', () => {
+    expect(sum(2,3).toBe(5));
+    expect(sum(-2, -3).toBe(-5));
+    expect(sum().toBe('Please check arguments'))
+})
+
+const sum = (a,b) => a+b;
+
+What we do instead is first we write our sum function a + b, then I will write my test case, it will break, then I will fix, then I will comeback and do random stuff. This is the approach we follow and this is not test driven development.
+
+Q: Can we run a test in JS without a tool like Karma or Jest
+
+What are different types of testing?
+- Manual testing: Human goes to the website and checks the tests. You click on add item and the cart shows 3. Manual testing requires humans. Many companies hire an entire testing team and they just keep on testing it. 
+
+There will be a tester who will try to write random things into the input box, who will try to inject code whether it is breaking or not. 
+
+
+- Automated testing: Code testing a code. Some code that tests your code because we don't want humans involved. Because when there are humans involved,there are errors involved.
+            - Selenium is used in Java. It helps us write an entire workflow of test cases, we can write entire 
+            end to end testing.
+            
+- End to End testing 
+            - Cypress - User will go to a website, it will login, it will see the search page, add item, click on order and place it. Whole flow is tested. To do this E2E testing, it requires a lot of effort because the test case is huge as it covers entire user journey. So, most of the times, this part is offloaded to QA team. 
+
+Headless browser is used by the QA team most of  the times. Its kinda actual browser but does not show anything. Its an invisible browser without a view port, without a UI. Where will this testing happen? This testing will happen in some browser, some machine.
+
+Why do we need this view port? This view port is needed for manual testing because human will see. However, when we write code, we do not need to see things up. That is why, we use headless browser. 
+
+****************Read about headless browser ****************
+
+What happens is these E2E test cases, we write open a headless browser, go to URL www. something, search for a login page, click on the data, it should login. Fill some random data, it should fail. We do it inside an actual browser. It is like replacing the manual testing with code. 
+
+I am telling you because you all should know this. 
+
+With headless browser, you can execute test cases faster. It is fast because it does not have to paint on the browser. But in headless browser, will there be a virtual DOM. Yes, there will be virtual DOM, there will be diff algorithm, there will be everything but the headless browser does not have to do the work of pushing, changing the view port, changing the colors, etc. So it is a little faster.
+
+Generally, its more of a QA job to write E2E test cases. In some companies, developers also write E2E, depends on the developer and the company.
+
+- Unit Testing. This is the core job of the developer. I am just testing whether this card is loading properly or not. When my app opens, is my header loading or not. Is my logo coming properly or not? It is kinda small component feature testing. This is what we will see. This is important for a developer to know.
+
+And the second important testing is something known as Integration testing. Testing is a huge in itself but majority of test cases fall under unit testing and integration testing and that is something we generally do.
+
+- Integration testing: Testing the integration between the components. If I am searching for soul, my restaurant list should change. This is a user behavior. Its a basic feature. There will be lot of users who will be doing a lot of this on our actual data flow. We will be testing this. 
+
+- Regression testing, smoke testing, performance testing, load testing, blackbox testing
+
+As developers, we should be concerned about smoke and regression testing. Testing is exactly like development. Development takes time. There is a learning curve, it takes time, it takes a mindset. Similarly, testing also takes time, mindset, effort to write test cases. It is just like development, testing is not like adding features. If you dont know testing, its completely fine but you should know the basics of testing.
+
+
+TIME FOR THE TEST NOW. We are going to study a lot of jargons, a lot of new things today. 
+
+RTL documentation suggests that this is a replacement for enzyme. Enzyme used to be an older way. For all new projects, use RTL
+
+testing-library.com > Frameworks > RTL > Introduction
+
+RTL is a part of testing library and this testing library offers support for React, Angular and other frameworks also.
+
+We are using Jest. Jest is a delightful JS testing framework. If you need to test JS code, we need Jest. Fast and safe, easy mocking, code coverage. Full fledged framework. Jest can have its own namaste jest.
+
+RTL uses Jest behind the scenes. RTL makes testing in react very efficient. You will enjoy writing Unit and integration tests which I am going to cover today.
+
+1. Install testing library/react as a devdependency
+
+With testing library, I also need to install Jest
+
+2. npm i -D jest
+
+jest 29 is different from the older version. If you are using older version, then lot of things will break. Do google search.
+
+3. Configure Jest
+ 
+ To configure, I will create a Jest.config file. Better way to do this is using Jest --config. How do I run this command? Will this command work like this. Jest is a package I won't use npm , I will use npx because I just need to execute it once. 
+
+ Q: Difference between npm and npx? What do we mean by running it once.
+
+ typescript? N
+ Test env?(node, jsdom) jsdom(browser-like) We are using browser like environment.
+ Coverage reports? Y
+ Provider to be used to instrument code for coverage? (v8, babel) babel
+Automatically clear mock calls, instances, contexts, results before every test 
+
+
+It created a big config file. You can create it manually or you can use npx jest --init
+
+We used npx instead of npm run because I wanted to create the jest.config file once
+
+00.46.02
+
+the command is just a handy tool that jest has created. A command line. That's all.  
+
+4. How do you run these tests? npm run tests
+
+We will get a lot of errors. I will make errors and then we learn how to fix these errors.
+  
+Error 1: As of Jest 28 "jest-environment-jsdom" is no longer shipped by default, make sure to install it separately. 
+Sol: npm i -D jest-environment-jsdom
+
+Lets run npm run test again. It says it checked 30 files but it did not find any test cases written in any of the files.
+
+Error 2: Test.js should contain atleast one test.
+Sol: Renamed it to sum.js
+
+
+> y@1.0.0 test
+> jest
+
+***********output of npm test*********************
+No tests found, exiting with code 1
+Run with `--passWithNoTests` to exit with code 0
+In C:\Study\React\Git\Namaste-React
+  34 files checked.
+  testMatch: **/__tests__/**/*.[jt]s?(x), **/?(*.)+(spec|test).[tj]s?(x) - 0 matches
+  testPathIgnorePatterns: \\node_modules\\ - 34 matches
+  testRegex:  - 0 matches
+Pattern:  - 0 matches
+***********output of npm test*********************
+
+Basically, Jest is trying to find tet cases in whole project. It did not find it because we did not write any. 
+
+Its also checking _tests_ folder, which is not there
+Its also checking the .spec.js which its not finding.
+
+Lets create a test file. 
+
+5. Installed jest-environment-jsdom
+
+6. Create my first test file. Be mindful of the name of this folder __tests__. 
+        It will give a cool red color icon. Why the name is important is when I name like this, jest will consider them as testing files. Whatever files I make inside this, Jest will consider them as testing files. 
+
+        This __ you would have seen many times. It is also known as dunder. Its just a naming convention and nothing much. Here in our test file, let us create our first test file. 
+
+Before moving to React testing, lets explore JS testing bcos Jest is a JS testing framework. Once you understand JS testing, React will be very easy to understand. 
+
+Let us take step by step and cover slowly. I will create a file which is sum.test.js. There is a convention used in the industry for .test.js, which means it is a testing file. Some teams use .spec.js, some use .ts and so on.
+
+If we write a file in __tests__, Jest will automatically track those files. The config says that all the .js or .ts files inside the __tests__ will be considered as test files. Else the second pattern is to use spec.js or test.js. I personally like using test.js because I know that will be testing my sum.test.js function.
+
+Lets write our first test case. We will write test and pass the first argument as the name of the test and the second argument is a function that the code will execute. In the function we expect something.
+
+test("check sum of two positive numbers", () => {
+
+})
+
+Observe that we have passed our test cases. However, our intent of writing test cases is to fail our code. Whenever there is a test case, it should have an expectation or assertion. We will assert something. We will expect our function to call with two parameters. Expect the sum call to return 7
+
+expect(sum(2,5).toBe(7))
+
+Where should this sum come from, it should come from the sum file. Otherwise, it will not know what to call.
+
+Import the named export from sum.
+
+How would the file know what is test and what is expect? Because Jest already understands this and it says we don't need to import it. Long ago, we used to import test and expect also.
+
+Now we don't need to import it. External functions like sum need to be imported. Lets run our tests now. If I run my tests, it says one test failed
+
+ SyntaxError: Cannot use import statement outside a module
+
+Normal JS files do not understand import. How will I make sure that my code understands this import? Using module.exports
+
+We will need to take help of Babel in this. 
+
+7. Install and Configure Babel
+
+If we go to Jest using Babel documentation, it says Jest will need some Babel packages. 
+
+npm install --save-dev babel-jest @babel/core @babel/preset-env
+
+Observe we are installing Babel Jest, Babel core and Babel preset-env
+
+Create your Babel config js and it will configure it. preset-env.
+
+Basically, Babel will make us understand that there is something known as import. By default, Jest does not know what is import. Babel will tell Jest. 
+
+Babel will take some code and modify it. We will add the configuration of preset-env. We will need to add babel.config.js
+
+We are doing this because our code does not understand import right now. Babel will help us understand. Babel is kind of a translator for us. 
+
+Instead of creating babel.config.js, we can create babelrc. So, when you have to configure babel, we can either use babelrc or babel.config.js, both ways we can use. Why did we use this babelrc file? To remove all the console logs.
+
+Similarly, now we will use Babel to make understand that we are using more things inside our code. 
+
+presets: [['@babel/preset-env', {targets: {node: 'current'}}]],
+
+This is throwing an error. Why? Not because this is not a valid Javascript. This is a valid Javascript.
+
+Let me tell you most people will be not able to answer this question. And most people do not understand Javascript.
+
+This is because babelrc requires a json. 
+
+Many people think that json and js object are same. JSON is different than JS object. 
+
+HW: You have to find out the diff between JSON and JS object.
+
+How do you convert to JSON? JSON takes double quotes for everything. 
+
+HW: Can I write comma to the end? Find out.
+
+Lets run again.
+
+    TypeError: (0 , _sum.sum)(...).toBe is not a function
+    expect(sum(2, 5).toBe(5));
+
+    expect needs to end before toBe
+
+    Sol: expect(sum(2,5)).toBe(5)
+    
+
+Run it again and see. Observe that it expected 5 but received 7
+
+update toBe as 7 as that is the correct value
+    
+    expect(sum(2, 5)).toBe(7);
+
+We can also use notToBe, test for negative numbers and all other tests.
+
+Revision:
+Install rtl from testing library documentation
+Install jest
+Configure Jest - npx jest --init 
+    - Created jest.config.js
+Installed jest-environment-jsdom
+    - To fix version error
+Created first test
+    - Not running because the code does not understand import
+
+Important thing about testing:
+Today, I am not running my app. npm run start
+But we are running npm run test
+Are these tests running in a browser?
+
+No, we are running tests in a different environment called jest which is checking our code. Its not rendering on the browser. Browser would have understood import. But we are not running tests on browser, we are running tests on our code and Jest is taking care of it. We are using something known as Testenvironmnt: jsdom.
+
+Is jsdom a browser? No, its not a browser
+Will it have browser like functionalities? No, it will be like a mini-browser.
+
+HW: Read more about npm > jsdom
+
+I am saying that we are not running on browser, we need to tweak our code. We need to tell that it is not normal code running on browser. So jest needs to understand the import keyword.
+
+Jest does not understand import {sum}. To make Jest understand, we take help of Babel. On google, we need to write Jest Babel configuration. Babel will give the syntax to help Jest.  
+
+We should appreciate things. Babel helps everyone. At the core, Babel is a transpiler.
+
+That we wrote the testcase and we passed the test suite.
+
+We are getting the coverage report because we configured in the jest config about collecting coverage: collectCoverage: true
+
+We have 20 files changed. Did we change all of them? These files are coming from the coverage folder. This gives you the coverage report.
+
+Coverage report, basically, tells you how much of the code is covered. How many test cases we have written.
+
+These files are not required to be committed, we can ignore these files as this is only needed for our local development.
+
+Add /coverage to gitignore. Now, we have the exact files that are needed
+
+Now lets move to unit testing and show you.
+
+npm run start to run code side by side
+
+Now lets try to do unit testing. Unit testing was testing small components. Testing small individual components of our app. We will fail a lot but we will keep improving.
+
+Let us write a unit test for as soon as the page loads, as soon as the header component loads. 
+
+First of all, lets write for the header and then for the body.
+
+We will write what to expect when I load the header: 
+1. Logo needs to be displayed
+2. Cart needs to be zero
+3. My default status needs to be online.
+
+Make the test case name descriptive. By reading the test case, you should understand what you are doing. You should always write what you are expecting.
+
+Lot of people, you know, how they write test case names: logo load and done.That does not make sense, be a little more descriptive.
+
+This code is running inside jsdom and not our browser. What we will do is assume jsdom to be a small container. Its like a small machine which is running code. In that machine, I will just load the header.
+
+To load it, I will use the render function coming from RTL. I don't want to load the full app. Just render my head component
+
+In our App (App.js), we did ReactDOM.createRoot() and we did root.render() right. This is how you render in the browser. We have document.getElementById in the browser, we pick up the root and we render on to it.
+
+I want to connect the dots, otherwise you will not understand it. This will stick to your head.
+
+How did we render our application on to our page. Remember we find out the root html element and we try to render it inside the root. In jsdom, we do not have the HTML, we do not have the root, we are just loading the header. In this case, we cannot do root.render. For that, we will have to use render from RTL. RTL is giving us a container and in that container I will load my header. This is very important to note. This will clear your basics.
+
+I will render the header using render(<Header />)
+
+Lot of people write test cases but they don't know where and how it is run. Why we are writing render. They will just copy previous test cases and modify data. That's how people are testing.
+
+When we run tests using Jest. We are not running tests on browser. We are running tests on jsdom. It does not have a root
+
+First class, first thing we did was we saw index.html, which we did not see in so many years. We had this index.html, we had this root id and we wrote Not rendered. And whatever react does, it does inside this. We understood react has a root. Everything react does is it it puts under the root. This HTML is inside the whole app in the browser.
+
+Now, this root, this HTML is inside the browser. In JSdom we don't have the root, I just want to load my header. So, we do not have this root. So, RTL says don't worry, I am giving you a render function. This render function will create a small container for you and you can load your component inside it. I have loaded my header inside it. Now, whatever is rendered, I am taking that in a header variable and I am trying to log it. 
+
+
+Running the test says Support for jsx is not currently enabled. Our code does not understand jsx. Earlier it does not understand import. Now, it does not understand jsx. 
+
+If React is like Narendra Modi, Babel is like Amit Shah.
+
+To understand import, we installed preset-env. 
+
+So, we will install something known as babel/preset-react and give the configuration as runtime automatic. 
+
+Do I need to remember all this? No. This is just one-time configuration and have to do it once.
+
+What is runtime? Research it. 
+
+When jsdom is running our code, take the runtime as automatic and make our code compatible with react
+
+Install the preset-react library using npm i -D @babel/preset-react
+
+This was required for JSX code. Now, our code should understand it. Lets try to run npm run test.
+
+SyntaxError: C:\Study\React\Git\Namaste-React\src\assets\img\Food_Villa_New.png: Unexpected character '�'. (1:0)
+
+Observe that it is reading the header page. Now its is showing a syntax error on the Logo image. It says it cannot understand Logo image. It is throwing this error because its trying to read this png image as a Javascript.
+
+jsdom is trying to read the image as a Javascript but its a png image. So the jsdom or container where we are running our code does not understand images. 
+
+So, if we remove the Logo import and use a URL, it will work fine. Why? Because using URL is a string.
+
+// import Logo from "../assets/img/foodvilla.png"
+<img className="h-28 p-2" alt="logo" src={"Logo"}> 
+
+However, in the current case, our code is reading a PNG file and is saying that I don't understand PNG file. So, we have to figure out a workaround. In our testing, when something breaks, we create a mock for it. Its like a dummy image. We create a dummy image for testing.
+
+So, this dummy image needs to be JS because JSDOM understands JS. So lets name the file dummyLogo.js.
+
+To make the code know to use dummyLogo.png, we will add a configuration in Jest known as moduleNameMapper.
+
+We can tell moduleNameMapper that whenever we see a png image anytime in our app, we replace it with dummyImage string
+
+moduleNameMapper: {
+    "\\.png": "../mocks/dummyLogo.js"
+}
+
+For jpg also,
+
+moduleNameMapper: {
+    "\\.(jpg|png|svg)$": "../mocks/dummyLogo.js"
+}
+
+
+2.03
+
+We made progress, it gives us a new error now. It says react-redux is not found. It says your header does not have a provider. You are using redux in your app but you do not have a provider for it.
+
+This is because we are using useSelector. We have subscribed our header but we have not put in. Our code is running in jsdom right. So it does not have a provider. It does not have a applayout.
+
+How will it run, it can't run. Can you guess what will I do? 
+
+Should I give a dummy provider? No, I will create an actual store. Whenever I am rendering a header, I will give it a provider.  Provider will be from react-redux and will wrap it on top of Header component. So, we have provided our store to it.
+
+Now, be happy. 
+
+Lets run our test case again.
+
+Err: Cannot find module '../../utils' from 'src/components/__tests__/Header.test.js'
+at import store from "../../utils";
+
+utils does not have the default import 
+
+Solution: '../../utils/store'
+
+Run the test again.
+
+Error: useHref() may be used only in the context of a <Router> component
+
+In header component, we used Link. Our jsdom does not understand link. It does not know where the routing is coming from. So, we will need to give router also. 
+
+What was the API used to created for the router: createBrowserRouter. Will it work in the test cases? It will not work because its not a browser, we are running the tests in a different container. So, react-router-dom gives us another router called staticRouter. This staticRouter does not come from react-router-dom but it comes from react-router-dom/server
+
+It gives something known as staticRouter. The staticRouter comes from server and can work without browser. This router can work without browser. 
+
+Now, I will wrap my app inside the StaticRouter.
+
+Run the test again.
+
+Warning: React.jsx: type is invalid -- expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+Solution: Static Router is a named import and not a default import.
+
+Run the test again. All tests passed.
+
+Since we have taken break, its one hour and we have not written even a single test case. Why? When we use create-react-app, we abstract everything. We do not know the internals. 
+
+We have learned how to setup Jest, how to set up RTL, Babel/preset-env, Babel/preset-react, jest-config.js, babelrc
+
+Will you become a great developer if you don't know these things? No, you can't 
+
+I want my students to know the basics, important core stuff. You can find thousands of tutorials on writing test cases, watching youtube videos also. How to write test cases, how to fire an event, etc.
+
+But you won't find this core thing that what is happening inside it. We start writing npx create-react-app and we start writing test cases. It becomes very easy. I wanted you to go through that pain so that you can appreciate what's happening. So, now you can appreciate create-react-app developers. 
+
+Now you appreciate that create-react-app developers would have done all these things. When you run npx create-react-app, it does all these things for you. I want to dive deep into this. This is Namaste React. I don't want you to be average react developers.
+
+ I am not settling down on average, I want you to be excellent. I can just tell you the basics, but you will have to practice it, read it, read a lot about each and every keyword we studied today.
+
+ I know you might have a lot of curious questions but find out. I might also not have all those answers. I might also have not done thousands of research. I am just generating curiosity and telling what ever I know. 
+
+ We have just passed the testcase, we have just rendered it and have not expected something. Let us expect if Logo has rendered or not. Lets print and see what is there in header.
+
+ The printed is the virtual DOM object. Remember Babel was converting JSX to something. 
+
+       {
+        container: HTMLDivElement {
+          '__reactContainer$e0ful7czpe': FiberNode {
+
+We have reached to a point. In our container, we have rendered our header properly. This is the fiber node > React fiber > Reconciliation diff algorithm. This is what it is. We have rendered the header properly.
+
+Now, we can play with it we have got this header inside it. Now, let us do more stuff. Now, let us just see, let us just try to find logo
+
+DOM is a big tree structure. How do I find my logo. In browser,we can do document.getElementById or document.getElementByTagName
+
+Similarly, in testing, we can access getElementByTagName, getElementById, etc. Recommend using getElementByTagName
+
+Which is better? document.getElementById or document.getElementByClassName? Id is better because its more specific. 
+So, over here also, I will do by Test ID. This is not the actual HTML id but the test ID for uniqueness
+
+We did not write test id in code during development. Now lets write it. data-testid. If we write id, our browser recognizes it, but if I write data-testid, our Jest recognizes it. 
+
+const logo = header.getAllByTestId("logo")
+
+From consoling logo, we are able to retrieve the Image Element. The element type is the img tag. src we have got as dummy. We passed these props className, alt etc.
+
+Going deep is important. Next time you will get that, you will console log and see this. Now, it has also rendered its dummy image. It has injected our dummy image into the place of image (moduleNameMapper).
+
+It failed received undefined for logo.src
+
+Error: Expected is not the received
+Solution: getAllByTestId returns an array
+
+Testing is also same as development. We will need to same hit and trial as in development.
+
+Think about how fast you can write for loops. But think about the person who is learning for loops. 
+
+Testing also has a learning curve.
+
+To test for online, add a test id
+
+Lets add anohter test for cart items to be zero.
+
+As you see, all tests are almost similar, but important thing to note is the tests are also testing our hooks such as useOnline.
+
+If there is something wrong with the useOnline hook, the status would have turned to red dot emoji. 
+
+What my logo is testing? My logo is testing. 
+
+When we are testing for cart length, we are testing whether the store was setup properly or not, whether the component header is subscribing to our store properly or not, whether the useSelector is working properly or not.
+
+That is the importance of our test case. 
+
+Suppose some other piece of our code broke our store, this test case will fail.
+
+We can have all the expect written in one statement but the recommendation is to have a separate test case so we have a clear distinction.
+
+Let me tell you a magical thing which will help you in debugging a lot. Do you want to see what is rendered in that component, what is rendered in that container, it is very helpful to see what is rendered in that container, that jsdom.
+
+Update test id in the test to cart1 or something and Jest will show you the whole HTML. This shows you the whole body, div, dummy name, etc. We are getting dummy name because of our provider, our context.
+
+ <body>                                                                                                                       
+      <div>
+        <div
+          class="flex justify-between bg-cyan-200 shadow-2xl shadow-blue-50 sm:bg-purple-200"
+        >
+          <a
+            href="/"
+          >.......................
+          .......................
+          </body>
+
+This is easy to debug.
+
+
+So far, we have tested unit testing. Now, we need to do integration testing. 
+
+If we take the search bar, updating the search will impact multiple components, lets write the test cases for search bar.
+
+For search bar, lets render the body by wrapping it in router and provider and by importing render and Provider named imports.
+
+Reference Error: fetch is not defined.
+
+fetch is not defined because we are not running our code into browser. We are not having network access, we cannot make a network call in our test cases. We will use mock data to test our components. What we will do is we will try to mock our fetch also. 
+
+We will use global.fetch and a dummy function given by Jest known as jest.fn
+
+What does fetch do? It returns a promise. 
+
+We write Promise.resolve(). We can also test for failure case by writing Promise.reject
+
+Fetch does not return a json, it returns a readable stream. The api swiggy.io/data returns a readable stream and not json
+
+In the code, we again write a await data.json(), so it again returns us a promise, so another promise.resolve to resolve that.
+
+Now we will pass the data that we have to mock and that will power our data layer. Lets create a data.js to export the restaurant data. Now, we have created a dummy fetch and attached that fetch to global object.
+
+Now, my code will automatically understand what is happening inside my fetch. We just needed fetch and lets build our fetch. Why are we doing random things.
+
+Why two promises? When we do fetch, we do it two times. First prmise is returned as a promise with a readable stream and is assigned to data. Second, when we convert it to json, it is also resolved as a promise. That is why, we have these two promises. 
+
+Run the tests:
+
+Warning: An update to Body inside a test was not wrapped in act(...).
+
+Sol: We did not return the Promise in mock. Second Promise should also be a function
+
+json: () => {Promise.resolve(RESTAURANT_DATA)}
+
+
+Error:  TestingLibraryElementError: Unable to find an element by: [data-testid="search-btn"]   
+
+Reason: Body first loads shimmer
+
+Test for shimmer and I should test by shimmer id.
+
+What if we want HMR for testing? It comes out of the box from Jest. jest --watch
+
+testing library/jest-dom library helps us with the toBeInTheDocument API.
+
+
+data.js => Err: Your test suite must contain at least one test.
+
+Move the data to mocks
+
+All tests have passed.
+
+3.28
+
+This test does not give us so much confidence. Lets write a different test case.
+
+Lets check what is there in the document.
+
+expect(shimmer.innerHTML).toBeInTheDocument
+
+We observe that shimmer cards are inside it.
+
+expect(shimmer.children).toBeInTheDocument
+
+It returns 10 cards array. For getting confidence, we can check the length of cards array
+
+expect(shimmer.children.length).toBe(100)
+
+Lets now render our complete page. What do we need to do to avoid shimmer? I will have to wait.
+
+We can wait for 10 seconds. These are superpowers from Jest. 
+
+await waitFor(() => {//code here})
+
+I will wait till I have a search button on my screen.
+
+Since I am doing await, I need to make the test function async
+
+expect(resList.children.length).toBe(2)
+
+Now, my 2 restaurants are loaded by a dummy fetch data. 
+
+See what all we have covered. We have covered rendering of data. We have covered 
+mocking of the api. It is making the api call. It is setting up the state. We have tested the reconciliation for everything over here. How the data is loaded, shimmer loading.
+We have tested useEffect as getRestaurants is inside useEffect. We have tested our allRestaurants, filteredRestaurants, etc.
+
+Let us actually test search now. We type something into input box and hit on search button
+
+add data-testid to input box and mock the typing by fire event (from RTL)
+
+What we need is to fire the onchange event. So, it would be fireEvent.change on the input handle
+
+What I have to change inside the event? Remember somehting called as Synthetic event, what did the callback receive: Synthetic event.
+
+What value did the callback return? e.target.value
+
+Understanding the above concept is important. I need to mock the typing behavior. I will not type here, my code will type for me. I have changed this. Now, food will be automatically be typed for us. 
+
+Now I will fire a click on the search button and check the length of the filtered restaurants
+
+So, we tested how to do component testing, integration testing and unit testing. 
+
+Lets try testing the menu items page
+
+Add a test id to ul in Restaurant menu
+Mock the data
+wait for the menu to load
+
+Error: Only Header components are showing up
+Solution: Wrap header as single component. Do not wrap it on top of Menu
+
+Error: Data is not fetched to restaurant menu
+Solution: Mock data MENU_LIST is not created correctly
+
+You can view what it is printing by logging innerHTML
+
+Menu is UL and it will have a lot of children. Lets add the test to click the button
+
+Add testid to button component so we can use getAllByTestId to click it on the first button
+
+What did we test so far? We loaded the hotel, we loaded the restaurant menu, we added a new data of a restaurant menu, we clicked on the add button and it increased my cart items to two.
+
+If we add two more items, the cart will show 4 items.
+
+Amazing thing about the integration testing is we can also load cart component over here and check how many cards are rendered inside it.
+
+In sum js we have written the different steps.
+
+We have written our test cases starting from Javascript function. We have written test cases for checking our store.
+
+We have written our test cases to see if we have written our store is build properly or not.
+
+
+When we click on the add button, it dispatches an action, which updates the slice of the store and the cart component is subscribed to the store using a useSelector. We have tested whole redux we did today. Isn't it amazing?
+
+Summary:
+Remember all jargons in redux and in testing
+
+/**
+
+- Install React Testing Library
+- Install Jest
+- Configure Jest (npx jest --init)
+- Installed jest-environment-jsdom (Why? 29 version)
+- Create my first test (JS, expect, test)
+- Configure Babel (preset-env as import was failing)
+- Wrote expect sum test
+- gitignore coverage report
+- React testing failed and we installed preset-react
+- Provider
+- Static Router from react-router-dom/server
+- Our logo did not work. So, we created a mock image
+- Fetch broke. We did a global fetch. We wrote our own fetch function where we resolved two promises
+- Can you write the code for global fetch without seeing? Once you write, you will never forget
+- Fetched data. How data will be loaded? What is data-testid
+- HMR for testing (--watch)
+- Error come warning that we ignored
+- Shimmer testing
+- toBeInTheDocument
+- await waitFor and add async
+- fireEvent
+- fire a change event (understand why we wrote synthetic event)
+
+ */
+
+ What is action, dispatch, reducer, slice, store, waitFor, fireEvent? Give your 120%
+
+ Teacher can infuse curiosity, create excitement about the project, make you fall in love with react. But you have to maintain the relationship. I can just get you connected with react, fall in love with react. You have to maintain it.
+
+ What I have coded in 4 hours today will take you 4 days to properly understand. Don't hurry learning. Search for each thing and have to learn properly.
+
+1. Attend live classes
+2. You will be the best of React class
+3. Please have curiosity and I expect best results from best students
+4. Watch the recordings. Search over the internet. 
+5. Make your own notes. Take reference from my code and from others, do not copy
+6. Be active in discord and help each other.
+
+React is most popular UI library available in the market. React developers are earning huge packages. All I am teaching is the industry standard. Do your homework. Uplift your career.
+
+Success of you will define the success of Namaste React. Even today, the videos of Namaste JS are so popular. I want the same to be in React also.
+
+Please, please, please do your homework, put your efforts. Help others and be curious. Ask questions but help others. 
+
+Everyone over here, answer atleast five questions on discord. Ask yourself? Did I learn something new that I did not know.
+
+Minimum five questions everyone needs to answer.
+
+
+
 
 
 

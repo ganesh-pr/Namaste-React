@@ -14,9 +14,9 @@ import useOnline from "../utils/useOnline";
 import UserContext from "../utils/UserContext";
 
 const RestaurantList = ({ restaurants, user }) => {
-  console.log("res", restaurants);
+  //console.log("res", restaurants);
   return (
-    <div className="flex flex-wrap h-auto m-auto">
+    <div className="flex flex-wrap h-auto m-auto" data-testid="res-list">
       {restaurants.map((res) => {
         return (
           <Link to={"restaurant/" + res?.data.id} key={res?.data.id}>
@@ -54,9 +54,8 @@ const Body = ({ user: propsUser }) => {
   async function getRestaurants() {
     try {
       const data = await fetch(SWIGGY_API_URL);
-      console.log("line 55", data);
       let list = await data.json();
-      console.log(list);
+      //console.log(list);
       if (list.statusCode !== RESTAURANT_LIST_ERROR_CODE) {
         list?.data?.cards.forEach((restaurantListCard) => {
           if (restaurantListCard?.cardType === "seeAllRestaurants") {
@@ -78,8 +77,8 @@ const Body = ({ user: propsUser }) => {
   //   return <h1>🔴 Offline, please check your internet connection!!</h1>;
   // }
 
-  console.log("render", allRestaurants);
-  console.log("errorMessage", errorMessage);
+  //console.log("render", allRestaurants);
+  //console.log("errorMessage", errorMessage);
   //Avoid rendering
   //if (!allRestaurants) return null;
 
@@ -87,9 +86,9 @@ const Body = ({ user: propsUser }) => {
   return errorMessage ? (
     errorMessage === CORS_ERROR_MESSAGE ? (
       <>
-        <h4 class="error-message cursor-pointer">{errorMessage}</h4>
+        <h4 className="error-message cursor-pointer">{errorMessage}</h4>
         <a
-          class="cursor-pointer underline text-sky-600"
+          className="cursor-pointer underline text-sky-600"
           href="https://chrome.google.com/webstore"
           target="_blank"
         >
@@ -97,7 +96,7 @@ const Body = ({ user: propsUser }) => {
         </a>
       </>
     ) : (
-      <h4 class="error-message cursor-pointer">{errorMessage}</h4>
+      <h4 className="error-message cursor-pointer">{errorMessage}</h4>
     )
   ) : allRestaurants?.length === 0 ? (
     <Shimmer />
@@ -108,6 +107,7 @@ const Body = ({ user: propsUser }) => {
           type="text"
           name="Search"
           id="Search"
+          data-testid="search-input"
           className="focus:bg-cyan-300"
           value={searchTxt}
           onChange={(e) => {
@@ -118,6 +118,7 @@ const Body = ({ user: propsUser }) => {
 
         <button
           className="p-2 m-2 bg-blue-700 text-white hover:bg-cyan-300 rounded-xl"
+          data-testid="search-btn"
           onClick={() => {
             console.log(searchTxt);
             const filteredRestaurants = filterRestaurantData(

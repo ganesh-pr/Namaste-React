@@ -9,7 +9,7 @@ const RestaurantCard = ({
   user,
 }) => {
   const { user: contextUser } = useContext(UserContext);
-  console.log("test");
+
   return (
     <div className="w-56 p-2 m-2 shadow-lg bg-purple-50">
       <img src={IMG_CDN_URL + cloudinaryImageId} alt="Image" />

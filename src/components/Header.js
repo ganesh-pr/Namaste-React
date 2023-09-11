@@ -8,7 +8,13 @@ import { useSelector } from "react-redux";
 const Title = () => {
   return (
     <a href="/">
-      <img src={Food_Villa_New} className="h-28 px-2" alt="Food" srcSet="" />
+      <img
+        src={Food_Villa_New}
+        className="h-28 px-2"
+        alt="Food"
+        srcSet=""
+        data-testid="logo"
+      />
     </a>
   );
 };
@@ -46,22 +52,25 @@ const Header = () => {
             </Link>
           </li>
           <li className="px-3">
-            <Link className="hover:text-orange-600" to="/cart">
+            <Link
+              className="hover:text-orange-600"
+              to="/cart"
+              data-testid="cart"
+            >
               Cart - {cartItems.length} items
             </Link>
           </li>
         </ul>
         <h1 className="p-10 font-bold text-red-900">{user.name}</h1>
-        {isOnline ? (
-          <h1 className="py-10" title="Your internet is active">
-            ✅
-          </h1>
-        ) : (
-          <h1 className="py-10" title="Please check your internet connection.">
-            🔴
-          </h1>
-        )}
 
+        <h1
+          className="py-10"
+          title="Your internet is active"
+          data-testid="online-status"
+        >
+          {isOnline ? "✅" : "🔴"}
+        </h1>
+        {/*  Windows + dot for emoji */}
         {isLoggedIn ? (
           <button
             className="p-2 m-2 bg-blue-700 text-white hover:bg-cyan-300 rounded-xl"
